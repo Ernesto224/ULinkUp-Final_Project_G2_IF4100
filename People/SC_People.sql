@@ -1,0 +1,1 @@
+CREATE SCHEMA People;--Creation of People scheme
