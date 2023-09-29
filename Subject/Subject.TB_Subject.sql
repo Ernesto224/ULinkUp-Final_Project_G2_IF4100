@@ -1,4 +1,4 @@
---Table representing the Subject	 entity
+--Table representing the Subject entity
 CREATE TABLE Subject.TB_Subject
 (
 	Subject_ID VARCHAR(10) UNIQUE NOT NULL,
