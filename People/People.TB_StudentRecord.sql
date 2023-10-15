@@ -2,11 +2,11 @@
 --, all courses taken and their status.
 CREATE TABLE People.TB_StudentRecord
 (
-	ID_Student VARCHAR(10) NOT NULL,
+	Student_ID VARCHAR(10) NOT NULL,
 	CONSTRAINT fk_Record_Student
-	FOREIGN KEY (ID_Student)
-	REFERENCES People.TB_Student(ID_Student),
-	PRIMARY KEY(ID_Student),--The primary key of the record is 
+	FOREIGN KEY (Student_ID)
+	REFERENCES People.TB_Student(Student_ID),
+	PRIMARY KEY(Student_ID),--The primary key of the record is 
 	--the identifier of the student to whom the unique being belongs.
 	Record_Year DATE NOT NULL,--Refers to the year in which the 
 	--course was taken.
@@ -16,15 +16,15 @@ CREATE TABLE People.TB_StudentRecord
 	--in which the course was taken.
 	Record_Status VARCHAR(20) NOT NULL,--Refers to the status of 
 	--the course, enrolled, approved or failed.
-	ID_Subject VARCHAR(10) NOT NULL,
+	Subject_ID VARCHAR(10) NOT NULL,
 	CONSTRAINT fk_Record_Subject
-	FOREIGN KEY (ID_Subject)
-	REFERENCES Subject.TB_Subject(ID_Subject),
+	FOREIGN KEY (Subject_ID)
+	REFERENCES Subject.TB_Subject(Subject_ID),
 	--foreign key that represents the identifier of the specific course
-	ID_Group INT NOT NULL,
+	Group_ID INT NOT NULL,
 	CONSTRAINT fk_Record_Group
-	FOREIGN KEY (ID_Group)
-	REFERENCES Subject.TB_Group(ID_Group),
+	FOREIGN KEY (Group_ID)
+	REFERENCES Subject.TB_Group(Group_ID),
 	--foreign key that represents the identifier of the course group that was taken
 	Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
 	--is active or deleted, by default the value will be 1
