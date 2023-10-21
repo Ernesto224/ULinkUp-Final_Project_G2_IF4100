@@ -8,12 +8,11 @@
 CREATE PROCEDURE People.SP_Update_Person 
 	-- Add the parameters for the stored procedure here
 	@Param_People_ID INT,--Unique numeric identifier that identifies each person
-	@Param_People_Name VARCHAR(50),--Name of individual
-	@Param_People_Last_Name VARCHAR(50),--First and second surname of the person
-	@Param_People_Address VARCHAR(500),--Exact address of residence
+	@Param_People_Name VARCHAR(50) NULL,--Name of individual
+	@Param_People_Last_Name VARCHAR(50) NULL,--First and second surname of the person
+	@Param_People_Address VARCHAR(500) NULL,--Exact address of residence
 	@Param_People_Phone VARCHAR(15) NULL, --The person's phone number can be null
-	@Param_People_Email VARCHAR(320),--Person's email address
-	@Param_Erased BIT NULL --bit type value that allows you to know if the record is active or deleted
+	@Param_People_Email VARCHAR(320) NULL--Person's email address
 AS
 BEGIN
 	BEGIN TRY
@@ -29,8 +28,7 @@ BEGIN
 				People_Last_Name=@Param_People_Last_Name,
 				People_Address=@Param_People_Address,
 				People_Phone=@Param_People_Phone,
-				People_Email=@Param_People_Email,
-				Erased=@Param_Erased
+				People_Email=@Param_People_Email
 			WHERE People_ID=@Param_People_ID;
 		END
 		ELSE
@@ -39,6 +37,7 @@ BEGIN
 		END
 	END TRY
 	BEGIN CATCH
-		SELECT ERROR_MESSAGE()
+		SELECT ERROR_PROCEDURE() AS [PROCEDURE]
+		SELECT ERROR_MESSAGE() AS ERROR
 	END CATCH
 END
