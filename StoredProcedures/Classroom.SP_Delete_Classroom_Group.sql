@@ -7,7 +7,9 @@ BEGIN
     BEGIN TRY
         IF EXISTS (SELECT TOP 1 1 FROM CLASSROOM.TB_CLASSROOM_GROUP WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID)
         BEGIN
-            DELETE FROM CLASSROOM.TB_CLASSROOM_GROUP WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID;
+            UPDATE CLASSROOM.TB_CLASSROOM_GROUP
+            SET Erased = 0
+            WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID;
         END
         ELSE
         BEGIN

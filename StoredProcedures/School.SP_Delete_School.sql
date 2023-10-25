@@ -1,4 +1,4 @@
--- Delete a school
+-- Delete a school (logical deletion)
 CREATE PROCEDURE SCHOOL.SP_Delete_School
     @Param_ID_School INT
 AS
@@ -6,7 +6,9 @@ BEGIN
     BEGIN TRY
         IF EXISTS (SELECT TOP 1 1 FROM SCHOOL.TB_SCHOOLS WHERE ID_School = @Param_ID_School)
         BEGIN
-            DELETE FROM SCHOOL.TB_SCHOOLS WHERE ID_School = @Param_ID_School;
+            UPDATE SCHOOL.TB_SCHOOLS
+            SET Erased = 0
+            WHERE ID_School = @Param_ID_School;
         END
         ELSE
         BEGIN
