@@ -1,0 +1,1 @@
+CREATE SCHEMA Building; --Creation of Building schema

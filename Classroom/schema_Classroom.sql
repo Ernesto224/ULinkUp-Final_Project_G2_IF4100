@@ -1,0 +1,1 @@
+CREATE SCHEMA CLASSROOM --Creation of Classroom schema
