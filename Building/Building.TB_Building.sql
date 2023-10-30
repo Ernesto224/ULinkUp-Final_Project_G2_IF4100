@@ -1,5 +1,5 @@
 -- Table to store building information
-CREATE TABLE BUILDING.TB_BUILDING
+CREATE TABLE Building.TB_Building
 (
     Building_ID INT NOT NULL, -- Unique identifier for the building
     Building_Name VARCHAR(100), -- Name of the building
@@ -9,9 +9,10 @@ CREATE TABLE BUILDING.TB_BUILDING
     Faculty_ID VARCHAR(10), -- Identifier of the faculty the building belongs to
 
     PRIMARY KEY (Building_ID), -- Primary key to uniquely identify each building
-    FOREIGN KEY (Enclosure_ID) REFERENCES ENCLOSURE.TB_ENCLOSURE (Enclosure_ID), -- Foreign key to relate to enclosure
-    FOREIGN KEY (Faculty_ID) REFERENCES ENCLOSURE.TB_FACULTY (Faculty_ID), -- Foreign key to relate to faculty
+    FOREIGN KEY (Enclosure_ID) REFERENCES Enclosure.TB_Enclosure (Enclosure_ID), -- Foreign key to relate to enclosure
+    FOREIGN KEY (Faculty_ID) REFERENCES Faculty.TB_Faculty (Faculty_ID), -- Foreign key to relate to faculty
     CONSTRAINT UNIQUE_BUILDING_NAME UNIQUE (BUILDING_NAME), -- Ensures unique building names
     CONSTRAINT CHECK_FACULTY CHECK (FACULTY IN (0, 1)), -- Validates faculty value (0 or 1)
     Erased BIT DEFAULT 1 NOT NULL -- Bit field to indicate if the record is active (1) or deleted (0)
 );
+--IN 3FN AND 4FN, NOT 5FN BUT 5FN MAKE DE DB MORE COMPLEX

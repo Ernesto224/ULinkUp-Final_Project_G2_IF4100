@@ -15,3 +15,4 @@ CREATE TABLE Subject.TB_Subject
 	Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
 	--is active or deleted,by default the value will be 1
 );
+--IN 5FN
