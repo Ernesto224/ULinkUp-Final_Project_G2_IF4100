@@ -6,5 +6,6 @@ Job_Description Varchar(1000) NOT NULL,--Description of the Job
 Salary INT NOT NULL,--Salary of the Employee
 People_ID INT NOT NULL,--ID for Identify it
 FOREIGN KEY (People_ID) REFERENCES People.People(People_ID),
-Erased_Administrative_Employee INT NOT NULL
+Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
+    --is active or deleted,by default the value will be 1
 ) 
