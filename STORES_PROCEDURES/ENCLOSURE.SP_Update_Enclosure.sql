@@ -21,6 +21,7 @@ BEGIN
 							SET
 								Enclosure_Name = ISNULL(@Param_Enclosure_Name)
 								,Campus_ID = ISNULL(@Param_Campus_ID)
+							WHERE Enclosure_ID = @Param_Enclosure_ID)
 						END
 		ELSE
 			BEGIN
