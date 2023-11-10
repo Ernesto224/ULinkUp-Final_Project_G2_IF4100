@@ -1,1 +1,0 @@
-CREATE SCHEMA CAMPUS --Schema from CAMPUS
