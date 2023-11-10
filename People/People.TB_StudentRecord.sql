@@ -10,22 +10,17 @@ CREATE TABLE People.TB_StudentRecord
 	--the identifier of the student to whom the unique being belongs.
 	Record_Year DATE NOT NULL,--Refers to the year in which the 
 	--course was taken.
-	Record_Semester INT NOT NULL,--Refers to the semester in which 
+	Record_Semester INT CHECK(Record_Semester < 3 AND Record_Semester > 0)NOT NULL,--Refers to the semester in which 
 	--the course was taken.
-	Record_Average FLOAT NOT NULL,--It refers to the final grade 
+	Record_Average FLOAT,--It refers to the final grade 
 	--in which the course was taken.
-	Record_Status VARCHAR(20) NOT NULL,--Refers to the status of 
+	Record_Status VARCHAR(20) DEFAULT 'Registered',--Refers to the status of 
 	--the course, enrolled, approved or failed.
-	Subject_ID VARCHAR(10) NOT NULL,
-	CONSTRAINT fk_Record_Subject
-	FOREIGN KEY (Subject_ID)
-	REFERENCES Subject.TB_Subject(Subject_ID),
-	--foreign key that represents the identifier of the specific course
 	Group_ID INT NOT NULL,
 	CONSTRAINT fk_Record_Group
 	FOREIGN KEY (Group_ID)
 	REFERENCES Subject.TB_Group(Group_ID),
 	--foreign key that represents the identifier of the course group that was taken
-	Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
+	Erased BIT DEFAULT 1 --bit type value that allows you to know if the record 
 	--is active or deleted, by default the value will be 1
 );
