@@ -20,6 +20,7 @@ BEGIN TRY
 		sr.Group_ID,
 		g.Group_Name
 	FROM People.TB_StudentRecord AS sr
+	WHERE Erased = 1
 
 END TRY
 BEGIN CATCH
