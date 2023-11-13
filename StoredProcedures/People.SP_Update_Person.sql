@@ -24,11 +24,11 @@ BEGIN
 			UPDATE 
 				People.TB_People
 			SET
-				People_Name=@Param_People_Name,
-				People_Last_Name=@Param_People_Last_Name,
-				People_Address=@Param_People_Address,
-				People_Phone=@Param_People_Phone,
-				People_Email=@Param_People_Email
+				People_Name=ISNULL(@Param_People_Name, People_Name),
+				People_Last_Name=ISNULL(@Param_People_Last_Name, People_Last_Name),
+				People_Address=ISNULL(@Param_People_Address, People_Address),
+				People_Phone=ISNULL(@Param_People_Phone, People_Phone),
+				People_Email=ISNULL(@Param_People_Email, People_Email)
 			WHERE People_ID=@Param_People_ID;
 		END
 		ELSE

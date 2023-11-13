@@ -1,1 +1,1 @@
-CREATE SCHEMA Course;--Creation of the course outline
+CREATE SCHEMA Subject;--Creation of the course outline
