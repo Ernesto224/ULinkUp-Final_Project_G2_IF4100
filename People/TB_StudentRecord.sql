@@ -19,7 +19,7 @@ CREATE TABLE People.TB_StudentRecord
 	Group_ID INT NOT NULL,
 	CONSTRAINT fk_Record_Group
 	FOREIGN KEY (Group_ID)
-	REFERENCES Subject.TB_Group(Group_ID),
+	REFERENCES [Group].TB_Group(Group_ID),
 	--foreign key that represents the identifier of the course group that was taken
 	Erased BIT DEFAULT 1 --bit type value that allows you to know if the record 
 	--is active or deleted, by default the value will be 1
