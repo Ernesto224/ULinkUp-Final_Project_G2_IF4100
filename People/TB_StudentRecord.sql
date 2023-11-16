@@ -12,7 +12,7 @@ CREATE TABLE People.TB_StudentRecord
 	--course was taken.
 	Record_Semester INT CHECK(Record_Semester < 3 AND Record_Semester > 0)NOT NULL,--Refers to the semester in which 
 	--the course was taken.
-	Record_Average FLOAT,--It refers to the final grade 
+	Record_Average FLOAT DEFAULT 0.0,--It refers to the final grade 
 	--in which the course was taken.
 	Record_Status VARCHAR(20) DEFAULT 'Registered',--Refers to the status of 
 	--the course, enrolled, approved or failed.
