@@ -7,7 +7,7 @@
 -- =============================================
 CREATE PROCEDURE Subject.SP_Delete_Subject
 	-- Add the parameters for the stored procedure here
-	@Param_Subject_ID VARCHAR(10),--Acronym that refers to 
+	@Param_Subject_ID INT--Acronym that refers to 
 	--the course code which is unique and alphanumeric
 AS
 BEGIN

@@ -20,7 +20,7 @@ BEGIN
 			SET @People_ID = (SELECT TOP (1)
 							People_ID
 							FROM People.TB_Student 
-							WHERE People_ID=@Param_People_ID)
+							WHERE People_ID = @Param_Student_ID)
 			--A variable is declared to retrieve the person's identity and delete it using a stored procedure.
 			UPDATE 
 				People.TB_Student

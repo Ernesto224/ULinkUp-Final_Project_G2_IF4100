@@ -11,18 +11,20 @@ AS
 BEGIN
 	BEGIN TRY
 
-		SELECT Subject_ID, 
-			Subject_Name,
-			Subject_Credits, 
-			Subject_Description, 
-			School_ID
-		FROM Subject.TB_Subject
+		SELECT [Subject_ID]
+		  ,[Subject_Name]
+		  ,[Subject_acronym]
+		  ,[Subject_Credits]
+		  ,[Subject_Description]
+		  ,[School_ID]
+		FROM [Subject].[TB_Subject]
 		WHERE Erased = 1
 
 	END TRY
 	BEGIN CATCH
 
-		SELECT ERROR_PROCEDURE() AS [PROCEDURE], SELECT ERROR_MESSAGE() AS ERROR
+		SELECT ERROR_PROCEDURE() AS [PROCEDURE]
+		SELECT ERROR_MESSAGE() AS ERROR
 
 END CATCH
 END
