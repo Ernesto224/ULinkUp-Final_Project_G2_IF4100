@@ -1,24 +1,24 @@
--- Update classroom data
-CREATE PROCEDURE CLASSROOM.SP_Update_Classroom
+-- Update Classroom data
+CREATE PROCEDURE Classroom.SP_Update_Classroom
  -- Add the parameters for the stored procedure here
-    @Param_Classroom_ID VARCHAR(10), -- Unique numeric identifier for the classroom
-    @Param_Classroom_Number NUMERIC(2, 0) NULL,
+    @Param_Classroom_ID INT, -- Unique numeric identifier for the Classroom
+    @Param_Classroom_Name VARCHAR(50) NULL,--Name from the Classroom
     @Param_Building_ID INT NULL --Building identifier
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM CLASSROOM.TB_CLASSROOM WHERE CLASSROOM_ID = @Param_Classroom_ID)
-        -- Validation to check if the classroom you want to update exists.
+        IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom WHERE Classroom_ID = @Param_Classroom_ID)
+        -- Validation to check if the Classroom you want to update exists.
         BEGIN
-            UPDATE CLASSROOM.TB_CLASSROOM
+            UPDATE Classroom.TB_Classroom
             SET
-                CLASSROOM_NUMBER = ISNULL(@Param_Classroom_Number, CLASSROOM_NUMBER),
-                BUILDING_ID = ISNULL(@Param_Building_ID, BUILDING_ID)
-            WHERE CLASSROOM_ID = @Param_Classroom_ID;
+                Classroom_Name = ISNULL(@Param_Classroom_Name, Classroom_Name),
+                Building_ID = ISNULL((SELECT Building_ID FROM Building.TB_Building WHERE Building_ID = @Param_Building_ID), Building_ID)
+            WHERE Classroom_ID = @Param_Classroom_ID;
         END
         ELSE
         BEGIN
-            SELECT 'The classroom does not exist in the DB';
+            SELECT 'The Classroom does not exist in the DB';
         END
     END TRY
     BEGIN CATCH
