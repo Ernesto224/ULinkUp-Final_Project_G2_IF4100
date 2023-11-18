@@ -8,11 +8,11 @@ CREATE TABLE People.TB_StudentRecord
 	REFERENCES People.TB_Student(Student_ID),
 	PRIMARY KEY(Student_ID),--The primary key of the record is 
 	--the identifier of the student to whom the unique being belongs.
-	Record_Year DATE NOT NULL,--Refers to the year in which the 
+	Record_Year INT NOT NULL,--Refers to the year in which the 
 	--course was taken.
 	Record_Semester INT CHECK(Record_Semester < 3 AND Record_Semester > 0)NOT NULL,--Refers to the semester in which 
 	--the course was taken.
-	Record_Average FLOAT DEFAULT 0.0,--It refers to the final grade 
+	Record_Average FLOAT,--It refers to the final grade 
 	--in which the course was taken.
 	Record_Status VARCHAR(20) DEFAULT 'Registered',--Refers to the status of 
 	--the course, enrolled, approved or failed.

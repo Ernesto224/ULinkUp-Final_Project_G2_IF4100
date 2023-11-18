@@ -3,8 +3,8 @@ CREATE TABLE Classroom.TB_Classroom_Group
 (
     Classroom_ID INT NOT NULL, -- Identifier of the classroom associated with a group
     Group_ID INT NOT NULL, -- Identifier of the group using the classroom
-    CG_Year DATE, -- Year when the classroom is used by the group (optional)
-    CG_Semester INT, -- Semester when the classroom is used by the group
+    CG_Year INT NOT NULL, -- Year when the classroom is used by the group (optional)
+    CG_Semester INT NOT NULL, -- Semester when the classroom is used by the group
     FOREIGN KEY (Classroom_ID) REFERENCES Classroom.TB_Classroom (Classroom_ID), -- Foreign key linking to the classroom table
     FOREIGN KEY (Group_ID) REFERENCES [Group].TB_Group (Group_ID), -- Foreign key linking to the group table
     -- Constraints:
