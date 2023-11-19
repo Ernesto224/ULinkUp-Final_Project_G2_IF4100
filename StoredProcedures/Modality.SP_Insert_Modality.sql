@@ -1,14 +1,14 @@
 -- Insert a new modality
-CREATE PROCEDURE MODALITY.SP_Insert_Modality
+CREATE PROCEDURE Modality.SP_Insert_Modality
     @Param_ID_Modality INT,
     @Param_Modality_Name VARCHAR(20)
 AS
 BEGIN
     BEGIN TRY
-        INSERT INTO MODALITY.TB_MODALITY 
+        INSERT INTO Modality.TB_Modality 
         (
-            ID_MODALITY,
-            MODALITY_NAME
+            Modality_ID,
+            Modality_Name
         )
         VALUES 
         (

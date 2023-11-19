@@ -1,15 +1,15 @@
 -- Update modality information
-CREATE PROCEDURE MODALITY.SP_Update_Modality
+CREATE PROCEDURE Modality.SP_Update_Modality
     @Param_ID_Modality INT,
     @Param_Modality_Name VARCHAR(20)
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM MODALITY.TB_MODALITY WHERE ID_MODALITY = @Param_ID_Modality)
+        IF EXISTS (SELECT TOP 1 1 FROM Modality.TB_Modality WHERE Modality_ID = @Param_ID_Modality)
         BEGIN
-            UPDATE MODALITY.TB_MODALITY
-            SET MODALITY_NAME = @Param_Modality_Name
-            WHERE ID_MODALITY = @Param_ID_Modality;
+            UPDATE Modality.TB_Modality
+            SET Modality_Name = @Param_Modality_Name
+            WHERE Modality_ID = @Param_ID_Modality;
         END
         ELSE
         BEGIN
@@ -21,3 +21,4 @@ BEGIN
         SELECT ERROR_MESSAGE() AS ERROR;
     END CATCH
 END;
+
