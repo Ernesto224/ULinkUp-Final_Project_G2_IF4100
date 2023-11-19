@@ -8,7 +8,7 @@ BEGIN
         IF EXISTS (SELECT TOP 1 1 FROM Modality.TB_Modality WHERE Modality_ID = @Param_ID_Modality)
         BEGIN
             UPDATE Modality.TB_Modality
-            SET Modality_Name = @Param_Modality_Name
+            SET Modality_Name = ISNULL(@Param_Modality_Name, Modality_Name)
             WHERE Modality_ID = @Param_ID_Modality;
         END
         ELSE
@@ -21,4 +21,5 @@ BEGIN
         SELECT ERROR_MESSAGE() AS ERROR;
     END CATCH
 END;
+
 

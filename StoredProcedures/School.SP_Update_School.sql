@@ -3,7 +3,8 @@ CREATE PROCEDURE School.SP_Update_School
     @Param_ID_School INT,
     @Param_Name_School VARCHAR(20) NULL,
 	@Param_School_abbrev VARCHAR(10) NULL,
-    @Param_Description_School VARCHAR(100) NULL
+    @Param_Description_School VARCHAR(100) NULL,
+	@Param_FacultyID INT
 AS
 BEGIN
     BEGIN TRY
@@ -13,7 +14,8 @@ BEGIN
             SET
                 School_Name = ISNULL(@Param_Name_School, School_Name),
 				School_abbrev = ISNULL(@Param_School_abbrev, School_abbrev),
-				School_Description = ISNULL(@Param_Description_School, School_Description)
+				School_Description = ISNULL(@Param_Description_School, School_Description),
+				Faculty_ID = ISNULL(@Param_FacultyID,Faculty_ID)
             WHERE School_ID = @Param_ID_School;
         END
         ELSE
