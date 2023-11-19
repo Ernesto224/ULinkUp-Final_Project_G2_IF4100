@@ -9,6 +9,7 @@ CREATE PROCEDURE Subject.SP_Update_Subject
 	-- Add the parameters for the stored procedure here
 	@Param_Subject_ID INT,--Unique numeric identifier that identifies each person
 	@Param_Subject_Name VARCHAR(50) NULL,--Course name
+	@Param_Subject_acronym VARCHAR(10) NULL,--subject acronym
 	@Param_Subject_Credits INT NULL,--Course credit value defaults to 0
 	@Param_Subject_Description VARCHAR(500) NULL,--Course Overview
 	@Param_School_ID INT NULL--Foreign key to assign 
@@ -21,22 +22,40 @@ BEGIN
 			WHERE Subject_ID=@Param_Subject_ID)
 		--Validation to know if the Subject you want to update exists.
 		BEGIN
-			UPDATE 
-				Subject.TB_Subject
-			SET 
-				Subject_Name=@Param_Subject_Name,
-				Subject_Credits=@Param_Subject_Credits,
-				Subject_Description=@Param_Subject_Description
-			WHERE Subject_ID=@Param_Subject_ID;
-			IF EXISTS(SELECT TOP 1 1
-				FROM School.TB_school
-				WHERE School_ID=@Param_School_ID)
+			IF @Param_School_ID IS NULL
 			BEGIN
+				--update not null values
 				UPDATE 
 					Subject.TB_Subject
 				SET 
-					School_ID=@Param_School_ID,
+					Subject_Name= ISNULL(@Param_Subject_Name, Subject_Name),
+					Subject_acronym= ISNULL(@Param_Subject_acronym, Subject_acronym),
+					Subject_Credits= ISNULL(@Param_Subject_Credits, Subject_Credits),
+					Subject_Description= ISNULL(@Param_Subject_Description, Subject_Description)
 				WHERE Subject_ID=@Param_Subject_ID;
+			END
+			ELSE
+			BEGIN
+				--validates the null school value
+				IF EXISTS(SELECT TOP 1 1
+					FROM School.TB_school
+					WHERE School_ID=@Param_School_ID)
+				BEGIN
+					UPDATE 
+						Subject.TB_Subject
+					SET 
+						Subject_Name= ISNULL(@Param_Subject_Name, Subject_Name),
+						Subject_acronym= ISNULL(@Param_Subject_acronym, Subject_acronym),
+						Subject_Credits= ISNULL(@Param_Subject_Credits, Subject_Credits),
+						Subject_Description= ISNULL(@Param_Subject_Description, Subject_Description),
+						School_ID= @Param_School_ID
+					WHERE Subject_ID=@Param_Subject_ID;
+				END
+				ELSE
+				BEGIN
+					--if the school id dont exist exit from sp
+					SELECT 'The subject does not exist in the DB'
+				END
 			END
 		END
 		ELSE

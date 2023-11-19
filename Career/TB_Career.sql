@@ -1,4 +1,3 @@
-
 --Create Table Faculty
 -- Nubia Brenes Valerín
 CREATE TABLE Career.TB_Career
@@ -7,6 +6,6 @@ CREATE TABLE Career.TB_Career
 	Career_Name VARCHAR(50) NOT NULL,
 	Career_acronym VARCHAR(10) NOT NULL,
 	Career_Description VARCHAR(500),
-	Faculty_ID INT FOREIGN KEY REFERENCES Faculty(Faculty_ID)
+	Faculty_ID INT FOREIGN KEY REFERENCES Faculty.TB_Faculty(Faculty_ID)
 )
 --IN 3FN

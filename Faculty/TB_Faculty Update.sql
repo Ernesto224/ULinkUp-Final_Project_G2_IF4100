@@ -1,4 +1,3 @@
-
 --Update Table Faculty
 -- Nubia Brenes Valerín
 ALTER TABLE Faculty.TB_Faculty

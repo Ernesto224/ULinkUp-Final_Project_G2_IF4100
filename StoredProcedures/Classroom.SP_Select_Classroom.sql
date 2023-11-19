@@ -5,7 +5,6 @@
 --data from the TB_Classroom table, belonging 
 --to the Subject schema.>
 -- =============================================
-
 CREATE PROCEDURE Classroom.SP_Select_Classroom
 AS
 BEGIN
@@ -20,7 +19,8 @@ BEGIN
 	END TRY
 	BEGIN CATCH
 
-		SELECT ERROR_PROCEDURE() AS [PROCEDURE], SELECT ERROR_MESSAGE() AS ERROR
+		SELECT ERROR_PROCEDURE() AS [PROCEDURE]
+		SELECT ERROR_MESSAGE() AS [ERROR]
 
 END CATCH
 END

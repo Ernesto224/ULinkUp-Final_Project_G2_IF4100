@@ -10,6 +10,7 @@ CREATE PROCEDURE Subject.SP_Insert_Subject
 	@Param_Subject_ID VARCHAR(10),--Acronym that refers to 
 	--the course code which is unique and alphanumeric
 	@Param_Subject_Name VARCHAR(50),--Course name
+	@Param_Subject_acronym VARCHAR(10),--subject acronym
 	@Param_Subject_Credits INT NULL,--Course credit value defaults to 0
 	@Param_Subject_Description VARCHAR(500),--Course Overview
 	@Param_School_ID INT--Foreign key to assign 
@@ -21,25 +22,44 @@ BEGIN
 				FROM School.TB_School
 				WHERE School_ID=@Param_School_ID)
 		BEGIN
-			
-		END
 		--It validates if the school exists in the system
 		--, if not, it enters it first through	 another stored procedure.
-		INSERT INTO Subject.TB_Subject
-		(
-			Subject_ID,
-			Subject_Name,
-			Subject_Credits,
-			Subject_Description,
-			School_ID
-		)VALUES
-		(
-			@Param_School_ID,
-			@Param_Subject_Name,
-			@Param_Subject_Credits,
-			@Param_Subject_Description,
-			@Param_School_ID
-		)
+			IF @Param_Subject_Credits != NULL --validates if credits are null
+			BEGIN
+				INSERT INTO Subject.TB_Subject
+				(
+					Subject_Name,
+					Subject_acronym,
+					Subject_Credits,
+					Subject_Description,
+					School_ID
+				)VALUES
+				(
+					@Param_Subject_Name,
+					@Param_Subject_acronym,
+					@Param_Subject_Credits,
+					@Param_Subject_Description,
+					@Param_School_ID
+				)
+			END
+			ELSE
+			BEGIN 
+				--insert a new subject with default 0 credits
+				INSERT INTO Subject.TB_Subject
+				(
+					Subject_Name,
+					Subject_acronym,
+					Subject_Description,
+					School_ID
+				)VALUES
+				(
+					@Param_Subject_Name,
+					@Param_Subject_acronym,
+					@Param_Subject_Description,
+					@Param_School_ID
+				)
+			END
+		END
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_PROCEDURE() AS [PROCEDURE]

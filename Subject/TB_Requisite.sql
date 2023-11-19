@@ -4,12 +4,12 @@ CREATE TABLE Subject.TB_Requisite
 (
 	Requisite_ID INT PRIMARY KEY IDENTITY NOT NULL,--Numeric identifier for 
 	--a course requirement.
-	Associated_Subject VARCHAR(10) NOT NULL,
+	Associated_Subject INT NOT NULL,
 	CONSTRAINT fk_Requisite_SubjectA
 	FOREIGN KEY (Associated_Subject)
 	REFERENCES Subject.TB_Subject(Subject_ID),--This foreign key that refers 
 	--to the course that needs the requirement
-	Required_Subject VARCHAR(10) NOT NULL,
+	Required_Subject INT NOT NULL,
 	CONSTRAINT fk_Requisite_SubjectR
 	FOREIGN KEY (Required_Subject)
 	REFERENCES Subject.TB_Subject(Subject_ID),--This foreign key that refers 

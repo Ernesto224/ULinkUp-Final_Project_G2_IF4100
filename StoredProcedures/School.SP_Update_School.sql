@@ -1,18 +1,20 @@
 -- Update school information
-CREATE PROCEDURE SCHOOL.SP_Update_School
+CREATE PROCEDURE School.SP_Update_School
     @Param_ID_School INT,
-    @Param_Name_School VARCHAR(20),
-    @Param_Description_School VARCHAR(100)
+    @Param_Name_School VARCHAR(20) NULL,
+	@Param_School_abbrev VARCHAR(10) NULL,
+    @Param_Description_School VARCHAR(100) NULL
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM SCHOOL.TB_SCHOOLS WHERE ID_School = @Param_ID_School)
+        IF EXISTS (SELECT TOP 1 1 FROM School.TB_School WHERE School_ID = @Param_ID_School)
         BEGIN
-            UPDATE SCHOOL.TB_SCHOOLS
+            UPDATE School.TB_School
             SET
-                Name_School = @Param_Name_School,
-                Description_School = @Param_Description_School
-            WHERE ID_School = @Param_ID_School;
+                School_Name = ISNULL(@Param_Name_School, School_Name),
+				School_abbrev = ISNULL(@Param_School_abbrev, School_abbrev),
+				School_Description = ISNULL(@Param_Description_School, School_Description)
+            WHERE School_ID = @Param_ID_School;
         END
         ELSE
         BEGIN

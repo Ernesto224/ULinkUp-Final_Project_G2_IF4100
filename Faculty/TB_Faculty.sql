@@ -1,4 +1,3 @@
-
 --Create Table Faculty
 -- Nubia Brenes Valerín
 CREATE TABLE Faculty.TB_Faculty
