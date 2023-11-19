@@ -1,30 +1,45 @@
--- ================================================
--- Template generated from Template Explorer using:
--- Create Procedure (New Menu).SQL
---
--- Use the Specify Values for Template Parameters 
--- command (Ctrl-Shift-M) to fill in the parameter 
--- values below.
---
--- This block of comments will not be included in
--- the definition of the procedure.
--- ================================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- =============================================
--- Author:		<Jesner Melgara>
--- Create date: <23-10-2023>
--- Description:	<Deleting data into the table named People.TB_Career_Student>
--- =============================================
--- Create procedure for deleting data from the table named People.TB_Career_Student
+
+USE IF4100_C10767
+GO
+
 CREATE PROCEDURE People.SP_Delete_Career_Student
     @param_Career_ID INT,
     @param_Student_ID VARCHAR(10)
 AS
 BEGIN
-    DELETE FROM People.TB_Career_Student
-    WHERE Career_ID = @param_Career_ID AND Student_ID = @param_Student_ID
+	BEGIN TRY
+		IF (
+            @param_Career_ID IS NOT NULL AND
+            @param_Student_ID IS NOT NULL AND
+            LEN(ISNULL(@param_Student_ID, '')) > 0
+        )
+		BEGIN
+			IF EXISTS(SELECT TOP 1 1 
+					FROM People.TB_Career_Student
+					WHERE Career_ID = @param_Career_ID AND Student_ID = @param_Student_ID)
+			BEGIN
+				UPDATE People.TB_Career_Student
+				SET
+					Erased = 1
+				WHERE Career_ID = @param_Career_ID AND Student_ID = @param_Student_ID;
+			END
+			ELSE
+			BEGIN
+				SELECT 'The Student does not exist in the Career';
+			END
+		END
+		ELSE
+		BEGIN
+			SELECT 'Invalid input parameters. Please provide valid values for Career_ID and Student_ID.'
+		END
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS [PROCEDURE],
+               ERROR_MESSAGE() AS [ERROR];
+	END CATCH
 END
 GO

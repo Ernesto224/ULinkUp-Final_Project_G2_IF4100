@@ -1,17 +1,9 @@
--- ================================================
--- Template generated from Template Explorer using:
--- Create Procedure (New Menu).SQL
---
--- Use the Specify Values for Template Parameters 
--- command (Ctrl-Shift-M) to fill in the parameter 
--- values below.
---
--- This block of comments will not be included in
--- the definition of the procedure.
--- ================================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
+GO
+USE
+IF4100_C10767
 GO
 -- =============================================
 -- Author:		<Jesner Melgara>
@@ -24,9 +16,25 @@ CREATE PROCEDURE People.SP_Update_Career_Student
     @param_Student_ID VARCHAR(10)
 AS
 BEGIN
-    UPDATE People.TB_Career_Student
-    SET Student_ID = @param_Student_ID
-    WHERE Career_ID = @param_Career_ID
-END
-
+    BEGIN TRY
+        IF (
+            @param_Career_ID IS NOT NULL AND
+            LEN(ISNULL(@param_Student_ID, '')) > 0
+        )
+        BEGIN
+            UPDATE People.TB_Career_Student
+            SET Student_ID = ISNULL(@param_Student_ID, Student_ID)
+            WHERE Career_ID = @param_Career_ID;
+        END
+        ELSE
+        BEGIN
+            SELECT 'Invalid input parameters. Please provide valid values for Career_ID and Student_ID.'
+        END
+    END TRY
+    BEGIN CATCH
+        SELECT ERROR_PROCEDURE() AS [PROCEDURE],
+               ERROR_MESSAGE() AS [ERROR];
+    END CATCH
+END;
 GO
+

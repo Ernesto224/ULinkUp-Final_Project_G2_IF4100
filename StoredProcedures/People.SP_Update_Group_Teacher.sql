@@ -1,17 +1,10 @@
--- ================================================
--- Template generated from Template Explorer using:
--- Create Procedure (New Menu).SQL
---
--- Use the Specify Values for Template Parameters 
--- command (Ctrl-Shift-M) to fill in the parameter 
--- values below.
---
--- This block of comments will not be included in
--- the definition of the procedure.
--- ================================================
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
+GO
+USE
+IF4100_C10767
 GO
 -- =============================================
 -- Author:		<Jesner Melgara>
@@ -20,13 +13,37 @@ GO
 -- =============================================
 -- Create procedure for updating data in the table named People.TB_Group_Teacher
 CREATE PROCEDURE People.SP_Update_Group_Teacher
-    @param_Id_Teacher VARCHAR(20),
+    @param_Teacher_ID INT,
     @param_Group_ID INT
 AS
 BEGIN
-    UPDATE People.TB_Group_Teacher
-    SET Group_ID = @param_Group_ID
-    WHERE Id_Teacher = @param_Id_Teacher
-END
-
+    BEGIN TRY
+        IF (
+            @param_Group_ID IS NOT NULL AND
+            @param_Teacher_ID IS NOT NULL AND
+            LEN(ISNULL(@param_Teacher_ID, '')) > 0
+        )
+        BEGIN
+            IF EXISTS (SELECT 1 FROM People.TB_Group_Teacher WHERE Group_ID = @param_Group_ID AND Teacher_ID = @param_Teacher_ID AND Erased = 1)
+            BEGIN
+                UPDATE People.TB_Group_Teacher
+                SET Group_ID = ISNULL(@param_Group_ID, Group_ID),
+                    Teacher_ID = ISNULL(@param_Teacher_ID, Teacher_ID)
+                WHERE Teacher_ID = @param_Teacher_ID AND Group_ID = @param_Group_ID;
+            END
+            ELSE
+            BEGIN
+                SELECT 'The group teacher relationship does not exist in the DB or is not marked as erased';
+            END
+        END
+        ELSE
+        BEGIN
+            SELECT 'Invalid input parameters. Please provide valid values for Teacher_ID and Group_ID.'
+        END
+    END TRY
+    BEGIN CATCH
+        SELECT ERROR_PROCEDURE() AS [PROCEDURE],
+               ERROR_MESSAGE() AS [ERROR];
+    END CATCH
+END;
 GO
