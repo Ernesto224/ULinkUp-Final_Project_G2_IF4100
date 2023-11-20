@@ -5,10 +5,10 @@
 --people into the TB_StudentRecord table, belonging 
 --to the person schema.>
 -- =============================================
-CREATE PROCEDURE People.SP_StudentRecord_Insert
+CREATE OR ALTER PROCEDURE People.SP_StudentRecord_Insert
 (
 	@Student_ID varchar(10),
-	@Record_Year date,
+	@Record_Year int,
 	@Record_Semester int,
 	@Record_Average float,
 	@Record_Status varchar(20),
@@ -16,22 +16,24 @@ CREATE PROCEDURE People.SP_StudentRecord_Insert
 )
 AS
 BEGIN
-BEGIN TRY
+	BEGIN TRY
 
-	IF NOT EXISTS (SELECT 1 FROM Subject.TB_Group WHERE Group_ID = @Group_ID)
-	BEGIN
-		SELECT ERROR_PROCEDURE() AS [PROCEDURE], SELECT ERROR_MESSAGE() AS ERROR
-		RETURN
-	END
+		IF EXISTS (SELECT TOP 1 1 FROM [Group].TB_Group WHERE Group_ID = @Group_ID)
+		BEGIN
+	
+			INSERT INTO People.TB_StudentRecord (Student_ID, Record_Year, Record_Semester, Record_Average, Record_Status, Group_ID)
+			VALUES (@Student_ID, @Record_Year, @Record_Semester, @Record_Average, @Record_Status, @Group_ID)
 
-	INSERT INTO People.TB_StudentRecord (Student_ID, Record_Year, Record_Semester, Record_Average, Record_Status, Group_ID)
-	VALUES (@Student_ID, @Record_Year, @Record_Semester, @Record_Average, @Record_Status, @Group_ID)
+		END
+		BEGIN
+			SELECT 'Data is not correct' AS [NOTIFICATION];
+		END
 
-END TRY
-BEGIN CATCH
+	END TRY
+	BEGIN CATCH
 
-	SELECT ERROR_PROCEDURE() AS [PROCEDURE] 
-	SELECT ERROR_MESSAGE() AS ERROR
+		SELECT ERROR_PROCEDURE() AS [PROCEDURE] 
+		SELECT ERROR_MESSAGE() AS ERROR
 
-END CATCH
+	END CATCH
 END

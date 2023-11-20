@@ -1,0 +1,10 @@
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Mechanical Engineer', 'HRM', 'Experienced professional with a strong background in the field', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Civil Engineer', 'ITC', 'Passionate about making a positive impact through my work', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Electrical Engineer', 'MKT', 'Detail-oriented and highly organized', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Software Engineer', 'FIN', 'Excellent communication and interpersonal skills', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Chemical Engineer', 'ENG', 'Proven track record of exceeding targets and goals', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Aerospace Engineer', 'ADM', 'Adaptable and quick to learn new technologies', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Environmental Engineer', 'OPS', 'Strong problem-solving and analytical abilities', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Biomedical Engineer', 'PRD', 'Team player with a collaborative mindset', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Industrial Engineer', 'RND', 'Creative thinker with a knack for innovation', 1);
+insert into Career.TB_Career (Career_Name, Career_acronym, Career_Description, Faculty_ID) values ('Petroleum Engineer', 'SAF', 'Highly motivated and self-driven individual', 1);

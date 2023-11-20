@@ -1,0 +1,41 @@
+ INSERT INTO People.TB_StudentRecord
+    (
+        Student_ID,
+        Record_Year,
+        Record_Semester,
+        Record_Average,
+        Record_Status,
+        Group_ID,
+        Erased
+    )
+    VALUES
+    (
+        'A00001',
+        2023,
+        1,
+        80,
+        'Registered',
+        6,
+        1
+    );
+
+	INSERT INTO People.TB_StudentRecord
+    (
+        Student_ID,
+        Record_Year,
+        Record_Semester,
+        Record_Average,
+        Record_Status,
+        Group_ID,
+        Erased
+    )
+    VALUES
+    (
+        'A00001',
+        2023,
+        1,
+        80,
+        'Registered',
+        2,
+        1
+    );

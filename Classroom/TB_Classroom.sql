@@ -1,6 +1,6 @@
 CREATE TABLE Classroom.TB_Classroom --CREATE TABLE CLASSROOM AND ITS ATRIBUTE
 (
-    Classroom_ID INT PRIMARY KEY NOT NULL,  -- Unique identifier for the Classroom
+    Classroom_ID INT PRIMARY KEY IDENTITY NOT NULL,  -- Unique identifier for the Classroom
     Classroom_Name VARCHAR(50) NOT NULL,  -- Classroom name, this can simply be c
 	--lassroom number n or it can be more complex, such as laboratory, etc.
     Building_ID INT NOT NULL, --Identifier of the building 

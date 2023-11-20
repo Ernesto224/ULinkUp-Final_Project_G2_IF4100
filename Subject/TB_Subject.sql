@@ -3,7 +3,7 @@ CREATE TABLE Subject.TB_Subject
 (
 	Subject_ID INT PRIMARY KEY IDENTITY NOT NULL,--Unique code of subject
 	Subject_Name VARCHAR(50) NOT NULL,--Course name
-	Subject_acronym VARCHAR(10) NOT NULL,--Acronym that refers to 
+	Subject_Acronym VARCHAR(10) NOT NULL,--Acronym that refers to 
 	--the course code which is unique and alphanumeric
 	Subject_Credits INT DEFAULT 0,--Course credit value defaults to 0
 	Subject_Description VARCHAR(500),--Course Overview

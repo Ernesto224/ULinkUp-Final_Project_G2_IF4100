@@ -5,7 +5,7 @@
 --subject, into the TB_Subject table, belonging 
 --to the Subject schema.>
 -- =============================================
-CREATE PROCEDURE Subject.SP_Insert_Subject
+CREATE OR ALTER PROCEDURE Subject.SP_Insert_Subject
 	-- Add the parameters for the stored procedure here
 	@Param_Subject_ID VARCHAR(10),--Acronym that refers to 
 	--the course code which is unique and alphanumeric

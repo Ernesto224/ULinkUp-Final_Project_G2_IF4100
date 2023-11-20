@@ -5,8 +5,7 @@ CREATE TABLE People.TB_StudentRecord
 	Student_ID VARCHAR(10) NOT NULL,
 	CONSTRAINT fk_Record_Student
 	FOREIGN KEY (Student_ID)
-	REFERENCES People.TB_Student(Student_ID),
-	PRIMARY KEY(Student_ID),--The primary key of the record is 
+	REFERENCES People.TB_Student(Student_ID), 
 	--the identifier of the student to whom the unique being belongs.
 	Record_Year INT NOT NULL,--Refers to the year in which the 
 	--course was taken.
@@ -20,6 +19,7 @@ CREATE TABLE People.TB_StudentRecord
 	CONSTRAINT fk_Record_Group
 	FOREIGN KEY (Group_ID)
 	REFERENCES [Group].TB_Group(Group_ID),
+	PRIMARY KEY(Student_ID, Group_ID),--The primary key of the record is
 	--foreign key that represents the identifier of the course group that was taken
 	Erased BIT DEFAULT 1 --bit type value that allows you to know if the record 
 	--is active or deleted, by default the value will be 1

@@ -5,7 +5,7 @@
 --subject, into the TB_Subject table, belonging 
 --to the person Subject.>
 -- =============================================
-CREATE PROCEDURE Subject.SP_Update_Subject 
+CREATE OR ALTER PROCEDURE Subject.SP_Update_Subject 
 	-- Add the parameters for the stored procedure here
 	@Param_Subject_ID INT,--Unique numeric identifier that identifies each person
 	@Param_Subject_Name VARCHAR(50) NULL,--Course name
@@ -29,33 +29,29 @@ BEGIN
 					Subject.TB_Subject
 				SET 
 					Subject_Name= ISNULL(@Param_Subject_Name, Subject_Name),
-					Subject_acronym= ISNULL(@Param_Subject_acronym, Subject_acronym),
+					Subject_Acronym= ISNULL(@Param_Subject_acronym, Subject_Acronym),
 					Subject_Credits= ISNULL(@Param_Subject_Credits, Subject_Credits),
 					Subject_Description= ISNULL(@Param_Subject_Description, Subject_Description)
 				WHERE Subject_ID=@Param_Subject_ID;
 			END
+			ELSE IF EXISTS(SELECT TOP 1 1
+				FROM School.TB_school
+				WHERE School_ID=@Param_School_ID)--validates the null school value
+			BEGIN
+				UPDATE 
+					Subject.TB_Subject
+				SET 
+					Subject_Name= ISNULL(@Param_Subject_Name, Subject_Name),
+					Subject_Acronym= ISNULL(@Param_Subject_acronym, Subject_Acronym),
+					Subject_Credits= ISNULL(@Param_Subject_Credits, Subject_Credits),
+					Subject_Description= ISNULL(@Param_Subject_Description, Subject_Description),
+					School_ID = @Param_School_ID
+				WHERE Subject_ID=@Param_Subject_ID;
+			END
 			ELSE
 			BEGIN
-				--validates the null school value
-				IF EXISTS(SELECT TOP 1 1
-					FROM School.TB_school
-					WHERE School_ID=@Param_School_ID)
-				BEGIN
-					UPDATE 
-						Subject.TB_Subject
-					SET 
-						Subject_Name= ISNULL(@Param_Subject_Name, Subject_Name),
-						Subject_acronym= ISNULL(@Param_Subject_acronym, Subject_acronym),
-						Subject_Credits= ISNULL(@Param_Subject_Credits, Subject_Credits),
-						Subject_Description= ISNULL(@Param_Subject_Description, Subject_Description),
-						School_ID= @Param_School_ID
-					WHERE Subject_ID=@Param_Subject_ID;
-				END
-				ELSE
-				BEGIN
-					--if the school id dont exist exit from sp
-					SELECT 'The subject does not exist in the DB'
-				END
+				--if the school id dont exist exit from sp
+				SELECT 'The subject does not exist in the DB'
 			END
 		END
 		ELSE

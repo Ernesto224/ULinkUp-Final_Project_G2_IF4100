@@ -37,7 +37,9 @@ BEGIN
 		)VALUES
 		(
 			@Param_Date_Admission,
-			@Param_People_ID
+			(SELECT TOP(1) People_ID 
+				FROM People.TB_People
+				ORDER BY People_ID DESC)
 		)
 	END TRY
 	BEGIN CATCH

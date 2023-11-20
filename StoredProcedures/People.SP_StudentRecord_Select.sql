@@ -17,8 +17,7 @@ BEGIN TRY
 		sr.Record_Semester,
 		sr.Record_Average,
 		sr.Record_Status,
-		sr.Group_ID,
-		g.Group_Name
+		sr.Group_ID
 	FROM People.TB_StudentRecord AS sr
 	WHERE Erased = 1
 

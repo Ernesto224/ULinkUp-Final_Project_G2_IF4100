@@ -7,7 +7,7 @@
 -- =============================================
 CREATE PROCEDURE People.SP_Delete_Student 
 	-- Add the parameters for the stored procedure here
-	@Param_Student_ID INT--Unique numeric identifier that identifies each person
+	@Param_Student_ID VARCHAR(10)--Unique numeric identifier that identifies each person
 AS
 BEGIN
 	BEGIN TRY
@@ -17,10 +17,10 @@ BEGIN
 		--Validation to know if the Student you want to delete exists.
 		BEGIN
 			DECLARE @People_ID INT
-			SET @People_ID = (SELECT TOP (1)
+			SET @People_ID = (SELECT
 							People_ID
 							FROM People.TB_Student 
-							WHERE People_ID = @Param_Student_ID)
+							WHERE Student_ID = @Param_Student_ID)
 			--A variable is declared to retrieve the person's identity and delete it using a stored procedure.
 			UPDATE 
 				People.TB_Student

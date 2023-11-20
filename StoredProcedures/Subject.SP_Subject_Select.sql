@@ -6,7 +6,7 @@
 --to the Subject schema.>
 -- =============================================
 
-CREATE PROCEDURE Subject.SP_Subject_Select
+CREATE OR ALTER PROCEDURE Subject.SP_Subject_Select
 AS
 BEGIN
 	BEGIN TRY

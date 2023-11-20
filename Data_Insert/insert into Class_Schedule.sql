@@ -1,0 +1,15 @@
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('16:30:00', '03:00:00', 'Friday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('11:15:00', '11:00:00', 'Saturday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('11:15:00', '03:00:00', 'Tuesday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('07:30:00', '19:00:00', 'Friday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('07:15:00', '03:00:00', 'Thursday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('09:45:00', '11:00:00', 'Monday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('10:00:00', '11:00:00', 'Tuesday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('07:15:00', '07:00:00', 'Tuesday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('09:45:00', '15:00:00', 'Friday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('08:30:00', '11:00:00', 'Saturday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('07:30:00', '19:00:00', 'Thursday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('16:30:00', '11:00:00', 'Wednesday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('15:15:00', '19:00:00', 'Sunday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('13:45:00', '19:00:00', 'Sunday');
+insert into Class_Schedule.TB_Class_Schedule (Start_Time, End_Time, [Day]) values ('10:00:00', '23:00:00', 'Saturday');

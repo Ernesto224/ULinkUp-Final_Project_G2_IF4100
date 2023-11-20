@@ -6,24 +6,28 @@
 --to the person schema.>
 -- =============================================
 
-CREATE PROCEDURE People.SP_StudentRecord_Delete
+CREATE OR ALTER PROCEDURE People.SP_StudentRecord_Delete
 (
-	@Student_ID varchar(10)
+	@Student_ID varchar(10),
+	@Group_ID int
 )
 AS
 BEGIN
 BEGIN TRY
 
-	IF NOT EXISTS (SELECT 1 FROM People.TB_StudentRecord WHERE Student_ID = @Student_ID)
+	IF EXISTS (SELECT TOP 1 1 FROM People.TB_StudentRecord WHERE Student_ID = @Student_ID AND Group_ID = @Group_ID)
 	BEGIN
-		SELECT ERROR_PROCEDURE() AS [PROCEDURE], SELECT ERROR_MESSAGE() AS ERROR
-		RETURN
+
+		UPDATE People.TB_StudentRecord
+		SET Erased = 0
+		WHERE Student_ID = @Student_ID AND Group_ID = @Group_ID;
+
 	END
-
-	UPDATE People.TB_StudentRecord
-	SET Erased = 0
-	WHERE Student_ID = @Student_ID
-
+	ELSE
+	BEGIN
+		SELECT 'The delete data is not correct' AS [NOTIFICATION];
+	END
+	
 END TRY
 BEGIN CATCH
 

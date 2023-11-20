@@ -1,7 +1,7 @@
 -- Table to store information about schools
 CREATE TABLE School.TB_School
 (
-    School_ID INT NOT NULL PRIMARY KEY, -- Unique identifier for the school
+    School_ID INT PRIMARY KEY IDENTITY NOT NULL, -- Unique identifier for the school
     School_Name VARCHAR(50) NOT NULL, -- Name of the school
 	School_abbrev VARCHAR(10),-- Abbrev of the School
     School_Description VARCHAR(100), -- Description of the school
