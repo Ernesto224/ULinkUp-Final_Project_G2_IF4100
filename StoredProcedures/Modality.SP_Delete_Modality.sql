@@ -1,14 +1,14 @@
 -- Delete a modality (logical deletion)
-CREATE PROCEDURE MODALITY.SP_Delete_Modality
+CREATE PROCEDURE Modality.SP_Delete_Modality
     @Param_ID_Modality INT
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM MODALITY.TB_MODALITY WHERE ID_MODALITY = @Param_ID_Modality)
+        IF EXISTS (SELECT TOP 1 1 FROM Modality.TB_Modality WHERE Modality_ID = @Param_ID_Modality)
         BEGIN
             UPDATE MODALITY.TB_MODALITY
             SET Erased = 0
-            WHERE ID_MODALITY = @Param_ID_Modality;
+            WHERE Modality_ID = @Param_ID_Modality;
         END
         ELSE
         BEGIN
@@ -20,3 +20,4 @@ BEGIN
         SELECT ERROR_MESSAGE() AS ERROR;
     END CATCH
 END;
+

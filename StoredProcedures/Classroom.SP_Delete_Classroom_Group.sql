@@ -1,5 +1,5 @@
 -- Delete the relationship between a classroom and a group (logical deletion)
-CREATE PROCEDURE CLASSROOM.SP_Delete_Classroom_Group
+CREATE PROCEDURE Classroom.SP_Delete_Classroom_Group
     @Param_Classroom_ID INT,
     @Param_Group_ID INT
 AS
