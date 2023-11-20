@@ -1,17 +1,10 @@
--- ================================================
--- Template generated from Template Explorer using:
--- Create Procedure (New Menu).SQL
---
--- Use the Specify Values for Template Parameters 
--- command (Ctrl-Shift-M) to fill in the parameter 
--- values below.
---
--- This block of comments will not be included in
--- the definition of the procedure.
--- ================================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
+GO
+
+USE
+IF4100_C10767
 GO
 -- =============================================
 -- Author:		<Jesner Melgara>
@@ -20,12 +13,28 @@ GO
 -- =============================================
 -- Create procedure for inserting data into the table named People.TB_Group_Teacher
 CREATE PROCEDURE People.SP_Insert_Group_Teacher
-    @param_Id_Teacher VARCHAR(20),
+    @param_Teacher_ID VARCHAR(20),
     @param_Group_ID INT
 AS
 BEGIN
-    INSERT INTO People.TB_Group_Teacher (Id_Teacher, Group_ID)
-    VALUES (@param_Id_Teacher, @param_Group_ID)
-END
-
+    BEGIN TRY
+        IF (
+            LEN(ISNULL(@param_Teacher_ID, '')) > 0 AND
+            @param_Group_ID IS NOT NULL
+        )
+        BEGIN
+            INSERT INTO People.TB_Group_Teacher (Teacher_ID, Group_ID)
+            VALUES (@param_Teacher_ID, @param_Group_ID);
+        END
+        ELSE
+        BEGIN
+            SELECT 'Invalid input parameters. Please provide valid values for Id_Teacher and Group_ID.'
+        END
+    END TRY
+    BEGIN CATCH
+        SELECT ERROR_PROCEDURE() AS [PROCEDURE],
+               ERROR_MESSAGE() AS [ERROR];
+    END CATCH
+END;
 GO
+

@@ -1,17 +1,9 @@
--- ================================================
--- Template generated from Template Explorer using:
--- Create Procedure (New Menu).SQL
---
--- Use the Specify Values for Template Parameters 
--- command (Ctrl-Shift-M) to fill in the parameter 
--- values below.
---
--- This block of comments will not be included in
--- the definition of the procedure.
--- ================================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
+GO
+USE
+IF4100_C10767
 GO
 -- =============================================
 -- Author:		<Jesner Melgara>
@@ -22,8 +14,15 @@ GO
 CREATE PROCEDURE People.SP_Select_Career_Student
 AS
 BEGIN
-    SELECT Career_ID, Student_ID
-    FROM People.TB_Career_Student
-END
-
+    BEGIN TRY
+        SELECT Career_ID, Student_ID
+        FROM People.TB_Career_Student
+		WHERE Erased = 1;
+    END TRY
+    BEGIN CATCH
+        SELECT ERROR_PROCEDURE() AS [PROCEDURE],
+               ERROR_MESSAGE() AS [ERROR];
+    END CATCH
+END;
 GO
+
