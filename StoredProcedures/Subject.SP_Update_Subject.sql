@@ -19,7 +19,7 @@ BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 			FROM Subject.TB_Subject 
-			WHERE Subject_ID=@Param_Subject_ID)
+			WHERE Subject_ID=@Param_Subject_ID AND Erased = 1)
 		--Validation to know if the Subject you want to update exists.
 		BEGIN
 			IF @Param_School_ID IS NULL
@@ -36,7 +36,7 @@ BEGIN
 			END
 			ELSE IF EXISTS(SELECT TOP 1 1
 				FROM School.TB_school
-				WHERE School_ID=@Param_School_ID)--validates the null school value
+				WHERE School_ID=@Param_School_ID AND Erased = 1)--validates the null school value
 			BEGIN
 				UPDATE 
 					Subject.TB_Subject
@@ -51,16 +51,16 @@ BEGIN
 			ELSE
 			BEGIN
 				--if the school id dont exist exit from sp
-				SELECT 'The subject does not exist in the DB'
+				SELECT 'The school does not exist in the DB' AS [NOTIFICATION];
 			END
 		END
 		ELSE
 		BEGIN
-			SELECT 'The subject does not exist in the DB'
+			SELECT 'The subject does not exist in the DB' AS [NOTIFICATION];
 		END
 	END TRY
 	BEGIN CATCH
-		SELECT ERROR_PROCEDURE() AS [PROCEDURE]
-		SELECT ERROR_MESSAGE() AS ERROR
+		SELECT ERROR_PROCEDURE() AS [PROCEDURE];
+		SELECT ERROR_MESSAGE() AS [ERROR];
 	END CATCH
 END

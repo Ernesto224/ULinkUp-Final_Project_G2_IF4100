@@ -1,22 +1,25 @@
-CREATE PROCEDURE Subject.SP_Requisite_Delete
+CREATE OR ALTER PROCEDURE Subject.SP_Requisite_Delete
 (
-    @Param_Requisite_ID INT
+    @Param_Associated_Subject INT,
+    @Param_Required_Subject INT
 )
 AS
 BEGIN
     BEGIN TRY
 		--validate if requisite_id exists
-		IF EXISTS(SELECT TOP 1 1 FROM Subject.TB_Requisite WHERE Requisite_ID = @Param_Requisite_ID)
+		IF EXISTS (SELECT TOP 1 1 FROM Subject.TB_Requisite WHERE Associated_Subject = @Param_Associated_Subject
+				AND Required_Subject = @Param_Required_Subject)
 		BEGIN
 			UPDATE 
 				Subject.TB_Requisite
 			SET 
 				Erased = 0
-			WHERE Requisite_ID = @Param_Requisite_ID;
+			WHERE Associated_Subject = @Param_Associated_Subject
+				AND Required_Subject = @Param_Required_Subject;
 		END
     END TRY
     BEGIN CATCH
-        SELECT ERROR_PROCEDURE() AS [PROCEDURE], 
-		ERROR_MESSAGE() AS ERROR;
+        SELECT ERROR_PROCEDURE() AS [PROCEDURE]; 
+		SELECT ERROR_MESSAGE() AS ERROR;
     END CATCH;
 END;

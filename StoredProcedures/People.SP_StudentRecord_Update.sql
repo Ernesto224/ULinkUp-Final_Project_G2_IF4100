@@ -19,7 +19,7 @@ AS
 BEGIN
 	BEGIN TRY
 
-		IF EXISTS (SELECT TOP 1 1 FROM People.TB_StudentRecord WHERE Student_ID = @Student_ID AND Group_ID = @Group_ID)
+		IF EXISTS (SELECT TOP 1 1 FROM People.TB_StudentRecord WHERE Student_ID = @Student_ID AND Group_ID = @Group_ID AND Erased = 1)
 		BEGIN
 			
 			UPDATE 

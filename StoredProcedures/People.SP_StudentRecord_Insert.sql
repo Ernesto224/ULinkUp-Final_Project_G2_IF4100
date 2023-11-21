@@ -18,7 +18,7 @@ AS
 BEGIN
 	BEGIN TRY
 
-		IF EXISTS (SELECT TOP 1 1 FROM [Group].TB_Group WHERE Group_ID = @Group_ID)
+		IF EXISTS (SELECT TOP 1 1 FROM [Group].TB_Group WHERE Group_ID = @Group_ID AND Erased = 1)
 		BEGIN
 	
 			INSERT INTO People.TB_StudentRecord (Student_ID, Record_Year, Record_Semester, Record_Average, Record_Status, Group_ID)
