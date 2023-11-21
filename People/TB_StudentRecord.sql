@@ -13,7 +13,7 @@ CREATE TABLE People.TB_StudentRecord
 	--the course was taken.
 	Record_Average FLOAT,--It refers to the final grade 
 	--in which the course was taken.
-	Record_Status VARCHAR(20) DEFAULT 'Registered',--Refers to the status of 
+	Record_Status VARCHAR(50) DEFAULT 'Registered',--Refers to the status of 
 	--the course, enrolled, approved or failed.
 	Group_ID INT NOT NULL,
 	CONSTRAINT fk_Record_Group

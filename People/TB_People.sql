@@ -5,9 +5,9 @@ CREATE TABLE People.TB_People
 	--that identifies each person
 	People_Name VARCHAR(50) NOT NULL,--Name of individual
 	People_Last_Name VARCHAR(50) NOT NULL,--First and second surname of the person
-	People_Address VARCHAR(500) NOT NULL,--Exact address of residence
-	People_Phone VARCHAR(15) UNIQUE, --The person's phone number can be null
-	People_Email VARCHAR(320) UNIQUE NOT NULL,--Person's email address
+	People_Address VARCHAR(100) NOT NULL,--Exact address of residence
+	People_Phone VARCHAR(20) UNIQUE, --The person's phone number can be null
+	People_Email VARCHAR(125) UNIQUE NOT NULL,--Person's email address
 	Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
 	--is active or deleted,by default the value will be 1
 );
