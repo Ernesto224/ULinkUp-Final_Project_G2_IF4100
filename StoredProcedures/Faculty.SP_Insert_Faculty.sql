@@ -1,8 +1,11 @@
+-- Author: Nubia Brenes Valerín
+-- Create date: 10/24/2023
+-- Description: SP to insert new data about Faculty into the TB_Faculty table, belonging to the Faculty schema.
+
 CREATE PROCEDURE Faculty.SP_Insert_Faculty 
 	-- Add the parameters for the stored procedure here
-	Faculty_ID           INT PRIMARY KEY IDENTITY NOT NULL,
-	Faculty_Name         VARCHAR(50) NOT NULL,
-	Faculty_Description  VARCHAR(500) NOT NULL
+	 @Param_Faculty_Name         VARCHAR(50),
+	 @Param_Faculty_Description  VARCHAR(500)
 AS
 BEGIN
 	BEGIN TRY
