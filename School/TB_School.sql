@@ -9,6 +9,6 @@ CREATE TABLE School.TB_School
 	CONSTRAINT fk_faculty_school
 	FOREIGN KEY (Faculty_ID)
 	REFERENCES Faculty.TB_Faculty (Faculty_ID),
-    Erased BIT DEFAULT 1 NOT NULL -- Bit field to indicate if the record is active (1) or deleted (0)
+    Erased BIT DEFAULT 0 NOT NULL  -- Bit field to indicate if the record is active (1) or deleted (0)
 );
 --5FN

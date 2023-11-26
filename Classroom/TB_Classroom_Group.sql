@@ -12,7 +12,7 @@ CREATE TABLE Classroom.TB_Classroom_Group
     CONSTRAINT UNIQUE_CLASSROOM_GROUP UNIQUE (Classroom_ID, Group_ID),
     -- Ensure that CG_SEMESTER is a positive integer value
     CONSTRAINT CHECK_SEMESTER CHECK (CG_Semester > 0),
-    Erased BIT DEFAULT 1 NOT NULL-- Bit field to indicate if the record is active (1) or deleted (0)
+    Erased BIT DEFAULT 0 NOT NULL -- Bit field to indicate if the record is active (1) or deleted (0)
 	PRIMARY KEY (Classroom_ID, Group_ID)
 );
 --IN 3FN

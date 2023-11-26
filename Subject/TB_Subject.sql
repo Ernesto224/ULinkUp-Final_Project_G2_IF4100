@@ -12,7 +12,7 @@ CREATE TABLE Subject.TB_Subject
 	FOREIGN KEY (School_ID)
 	REFERENCES School.TB_School (School_ID),--Foreign key to assign 
 	--a course a relationship with the school to which it belongs
-	Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
+	Erased BIT DEFAULT 0 NOT NULL  --bit type value that allows you to know if the record 
 	--is active or deleted,by default the value will be 1
 );
 --IN 5FN

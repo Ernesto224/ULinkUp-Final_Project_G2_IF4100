@@ -5,6 +5,6 @@ CREATE TABLE People.TB_Career_Student--intermediate table to relate a career to 
 	Student_ID VARCHAR(10) NOT NULL,--foreign key to relate a student
 	FOREIGN KEY (Student_ID) REFERENCES People.TB_Student(Student_ID),
 	PRIMARY KEY (Career_ID, Student_ID),
-	Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
+	Erased BIT DEFAULT 0 NOT NULL  --bit type value that allows you to know if the record 
 	--is active or deleted,by default the value will be 1
 )

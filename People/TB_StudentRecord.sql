@@ -21,6 +21,6 @@ CREATE TABLE People.TB_StudentRecord
 	REFERENCES [Group].TB_Group(Group_ID),
 	PRIMARY KEY(Student_ID, Group_ID),--The primary key of the record is
 	--foreign key that represents the identifier of the course group that was taken
-	Erased BIT DEFAULT 1 --bit type value that allows you to know if the record 
+	Erased BIT DEFAULT 0 NOT NULL--bit type value that allows you to know if the record 
 	--is active or deleted, by default the value will be 1
 );

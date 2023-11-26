@@ -11,6 +11,6 @@ CREATE TABLE People.TB_Group_Teacher
 	 PRIMARY KEY (Group_ID,Teacher_ID),--The primary key of the table is composed of 
 	 --the 2 foreign keys to indicate that a group does not appear twice associated 
 	 --with the same master, to avoid repeated data.
-	 Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
+	 Erased BIT DEFAULT 0 NOT NULL  --bit type value that allows you to know if the record 
 	--is active or deleted,by default the value will be 1
 )

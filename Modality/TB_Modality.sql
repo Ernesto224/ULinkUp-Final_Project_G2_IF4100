@@ -3,6 +3,6 @@ CREATE TABLE Modality.TB_Modality
 (
     Modality_ID INT NOT NULL PRIMARY KEY, -- Unique identifier for the modality
     Modality_Name VARCHAR(50) UNIQUE NOT NULL, -- Name of the modality
-    Erased BIT DEFAULT 1 NOT NULL -- Bit field to indicate if the record is active (1) or deleted (0)
+    Erased BIT DEFAULT 0 NOT NULL  -- Bit field to indicate if the record is active (1) or deleted (0)
 );
 --IN 5FN	

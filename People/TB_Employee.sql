@@ -9,6 +9,6 @@ CREATE TABLE People.TB_Employee
 	Date_Admission DATE NOT NULL,--date you started working at the institution
 	People_ID INT NOT NULL,--ID for Identify it in the person table
 	FOREIGN KEY (People_ID) REFERENCES People.TB_People(People_ID),
-	Erased BIT DEFAULT 1 NOT NULL --bit type value that allows you to know if the record 
+	Erased BIT DEFAULT 0 NOT NULL  --bit type value that allows you to know if the record 
 	--is active or deleted,by default the value will be 1
 )

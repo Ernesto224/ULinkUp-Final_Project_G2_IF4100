@@ -12,6 +12,6 @@ CREATE TABLE Building.TB_Building
     FOREIGN KEY (Faculty_ID) REFERENCES Faculty.TB_Faculty (Faculty_ID), -- Foreign key to relate to faculty
     CONSTRAINT UNIQUE_BUILDING_NAME UNIQUE (Building_Name), -- Ensures unique building names
     CONSTRAINT CHECK_FACULTY CHECK (Faculty IN (0, 1)), -- Validates faculty value (0 or 1)
-    Erased BIT DEFAULT 1 NOT NULL-- Bit field to indicate if the record is active (1) or deleted (0)
+    Erased BIT DEFAULT 0 NOT NULL -- Bit field to indicate if the record is active (1) or deleted (0)
 );
 --IN 3FN AND 4FN, NOT 5FN BUT 5FN MAKE DE DB MORE COMPLEX
