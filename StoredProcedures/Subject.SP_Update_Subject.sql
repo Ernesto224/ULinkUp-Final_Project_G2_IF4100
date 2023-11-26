@@ -19,7 +19,7 @@ BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 			FROM Subject.TB_Subject 
-			WHERE Subject_ID=@Param_Subject_ID AND Erased = 1)
+			WHERE Subject_ID=@Param_Subject_ID AND Erased = 0)
 		--Validation to know if the Subject you want to update exists.
 		BEGIN
 			IF @Param_School_ID IS NULL
@@ -36,7 +36,7 @@ BEGIN
 			END
 			ELSE IF EXISTS(SELECT TOP 1 1
 				FROM School.TB_school
-				WHERE School_ID=@Param_School_ID AND Erased = 1)--validates the null school value
+				WHERE School_ID=@Param_School_ID AND Erased = 0)--validates the null school value
 			BEGIN
 				UPDATE 
 					Subject.TB_Subject

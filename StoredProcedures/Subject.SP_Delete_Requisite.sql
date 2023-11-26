@@ -8,12 +8,12 @@ BEGIN
     BEGIN TRY
 		--validate if requisite_id exists
 		IF EXISTS (SELECT TOP 1 1 FROM Subject.TB_Requisite WHERE Associated_Subject = @Param_Associated_Subject
-				AND Required_Subject = @Param_Required_Subject)
+				AND Required_Subject = @Param_Required_Subject AND Erased = 0)
 		BEGIN
 			UPDATE 
 				Subject.TB_Requisite
 			SET 
-				Erased = 0
+				Erased = 1
 			WHERE Associated_Subject = @Param_Associated_Subject
 				AND Required_Subject = @Param_Required_Subject;
 		END

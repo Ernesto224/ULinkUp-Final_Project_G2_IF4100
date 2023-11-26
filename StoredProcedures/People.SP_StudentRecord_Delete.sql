@@ -15,11 +15,14 @@ AS
 BEGIN
 BEGIN TRY
 
-	IF EXISTS (SELECT TOP 1 1 FROM People.TB_StudentRecord WHERE Student_ID = @Student_ID AND Group_ID = @Group_ID)
+	IF EXISTS (SELECT TOP 1 1 FROM People.TB_StudentRecord 
+				WHERE Student_ID = @Student_ID 
+				AND Group_ID = @Group_ID
+				AND Erased = 0)
 	BEGIN
 
 		UPDATE People.TB_StudentRecord
-		SET Erased = 0
+		SET Erased = 1
 		WHERE Student_ID = @Student_ID AND Group_ID = @Group_ID;
 
 	END

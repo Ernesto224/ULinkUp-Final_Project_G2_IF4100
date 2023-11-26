@@ -11,13 +11,13 @@ GO
 -- Description:	<Selecting data into the table named People.TB_Career_Student>
 -- =============================================
 -- Create procedure for selecting data from the table named People.TB_Career_Student
-CREATE PROCEDURE People.SP_Select_Career_Student
+CREATE OR ALTER PROCEDURE People.SP_Select_Career_Student
 AS
 BEGIN
     BEGIN TRY
         SELECT Career_ID, Student_ID
         FROM People.TB_Career_Student
-		WHERE Erased = 1;
+		WHERE Erased = 0;
     END TRY
     BEGIN CATCH
         SELECT ERROR_PROCEDURE() AS [PROCEDURE],

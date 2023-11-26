@@ -18,7 +18,7 @@ BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 				FROM School.TB_School
-				WHERE School_ID = @Param_School_ID AND Erased = 1)
+				WHERE School_ID = @Param_School_ID AND Erased = 0)
 		BEGIN
 			--It validates if the school exists in the system
 			--, if not, it enters it first through	 another stored procedure.

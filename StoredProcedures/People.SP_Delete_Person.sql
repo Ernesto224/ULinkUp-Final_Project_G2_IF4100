@@ -5,7 +5,7 @@
 --people into the TB_People table, belonging 
 --to the person schema.>
 -- =============================================
-CREATE PROCEDURE People.SP_Delete_Person 
+CREATE OR ALTER PROCEDURE People.SP_Delete_Person 
 	-- Add the parameters for the stored procedure here
 	@Param_People_ID INT--Unique numeric identifier that identifies each person
 AS
@@ -13,13 +13,14 @@ BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 			FROM People.TB_People 
-			WHERE People_ID=@Param_People_ID)
+			WHERE People_ID=@Param_People_ID
+			AND Erased = 0)
 		--Validation to know if the person you want to delete exists.
 		BEGIN
 			UPDATE 
 				People.TB_People
 			SET
-				Erased=0
+				Erased = 1
 			WHERE People_ID=@Param_People_ID;
 			--The deletion is done by logical deletion by changing the state of the deletion column from 1 to 0.
 		END

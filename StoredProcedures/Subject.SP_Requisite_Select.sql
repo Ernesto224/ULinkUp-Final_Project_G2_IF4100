@@ -6,7 +6,7 @@ BEGIN
 		SELECT Associated_Subject, 
 			Required_Subject
 		FROM Subject.TB_Requisite
-		WHERE Erased = 1
+		WHERE Erased = 0
 
 	END TRY
 	BEGIN CATCH

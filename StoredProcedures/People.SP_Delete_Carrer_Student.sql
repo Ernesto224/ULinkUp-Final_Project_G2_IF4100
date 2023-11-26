@@ -6,7 +6,7 @@ GO
 USE IF4100_C10767
 GO
 
-CREATE PROCEDURE People.SP_Delete_Career_Student
+CREATE OR ALTER PROCEDURE People.SP_Delete_Career_Student
     @param_Career_ID INT,
     @param_Student_ID VARCHAR(10)
 AS

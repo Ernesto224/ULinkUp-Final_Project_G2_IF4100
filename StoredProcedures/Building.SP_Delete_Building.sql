@@ -13,7 +13,7 @@ BEGIN
         BEGIN
             UPDATE Building.TB_Building
             SET
-                Erased = 0
+                Erased = 1
             WHERE Building_ID = @Param_Building_ID;
             -- The deletion is done by logical deletion by changing the state of the Erased column from 1 to 0.
         END

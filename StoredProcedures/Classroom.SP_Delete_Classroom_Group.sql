@@ -8,7 +8,7 @@ BEGIN
         IF EXISTS (SELECT TOP 1 1 FROM CLASSROOM.TB_CLASSROOM_GROUP WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID)
         BEGIN
             UPDATE CLASSROOM.TB_CLASSROOM_GROUP
-            SET Erased = 0
+            SET Erased = 1
             WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID;
         END
         ELSE

@@ -7,7 +7,7 @@ BEGIN
         IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom WHERE Classroom_ID = @Param_Classroom_ID)
         BEGIN
             UPDATE Classroom.TB_Classroom
-            SET Erased = 0
+            SET Erased = 1
             WHERE Classroom_ID = @Param_Classroom_ID;
         END
         ELSE

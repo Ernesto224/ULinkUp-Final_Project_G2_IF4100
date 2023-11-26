@@ -16,17 +16,17 @@ BEGIN
 					@Subject_ID INT,
 					@Carrer_ID INT;
 	
-			IF EXISTS (SELECT TOP 1 1 FROM [Group].[TB_Group] WHERE Group_ID = @Group_ID AND Erased = 1) 
-				AND EXISTS (SELECT TOP 1 1 FROM [People].[TB_Student] WHERE Student_ID = @Student_ID AND Erased = 1)
+			IF EXISTS (SELECT TOP 1 1 FROM [Group].[TB_Group] WHERE Group_ID = @Group_ID AND Erased = 0) 
+				AND EXISTS (SELECT TOP 1 1 FROM [People].[TB_Student] WHERE Student_ID = @Student_ID AND Erased = 0)
 			BEGIN
 
-				SET @Subject_ID = (SELECT Subject_ID FROM [Group].[TB_Group] WHERE Group_ID = @Group_ID AND Erased = 1);
-				SET @Carrer_ID = (SELECT Career_ID FROM [Career].[TB_Career_Subject] WHERE Subject_ID = @Subject_ID AND Erased = 1);
+				SET @Subject_ID = (SELECT Subject_ID FROM [Group].[TB_Group] WHERE Group_ID = @Group_ID AND Erased = 0);
+				SET @Carrer_ID = (SELECT Career_ID FROM [Career].[TB_Career_Subject] WHERE Subject_ID = @Subject_ID AND Erased = 0);
 			
-				IF EXISTS(SELECT TOP 1 1 FROM [People].[TB_Career_Student] WHERE Student_ID = @Student_ID AND Career_ID = @Carrer_ID AND Erased = 1) 
+				IF EXISTS(SELECT TOP 1 1 FROM [People].[TB_Career_Student] WHERE Student_ID = @Student_ID AND Career_ID = @Carrer_ID AND Erased = 0) 
 				BEGIN
 
-					IF (SELECT [Students_Enrolled] FROM [Group].[TB_Group] WHERE Group_ID = @Group_ID AND Erased = 1) < @Max_Enrollment
+					IF (SELECT [Students_Enrolled] FROM [Group].[TB_Group] WHERE Group_ID = @Group_ID AND Erased = 0) < @Max_Enrollment
 					BEGIN
 
 						DECLARE @Exists_Requirement INT,
@@ -47,9 +47,9 @@ BEGIN
 												ON Student_REC.Group_ID = [Group].Group_ID
 												JOIN [Subject].[TB_Subject] AS [Subject]
 													ON [Group].Subject_ID = [Subject].Subject_ID
-										WHERE Student_REC.Student_ID = @Student_ID AND Student_REC.Erased = 1) AS Aprove_Subjects_Of_Student
+										WHERE Student_REC.Student_ID = @Student_ID AND Student_REC.Erased = 0) AS Aprove_Subjects_Of_Student
 								ON Requerit_Subjects.Required_Subject = Aprove_Subjects_Of_Student.Subject_ID
-						WHERE [Subject].Subject_ID = @Subject_ID AND [Subject].Erased = 1
+						WHERE [Subject].Subject_ID = @Subject_ID AND [Subject].Erased = 0
 
 						IF @Exists_Requirement > 0
 						BEGIN 
@@ -61,8 +61,8 @@ BEGIN
 												FROM [People].[TB_StudentRecord] 
 												WHERE Student_ID = @Student_ID 
 												AND Group_ID = @Group_ID 
-												AND Record_Status LIKE 'reprobate'
-												AND Erased = 1)
+												AND LOWER(Record_Status) LIKE 'reprobate'
+												AND Erased = 0)
 								BEGIN
 									INSERT INTO [People].[TB_StudentRecord]
 											([Student_ID]
@@ -83,7 +83,7 @@ BEGIN
 												FROM [People].[TB_StudentRecord] 
 												WHERE Student_ID = @Student_ID 
 												AND Group_ID = @Group_ID
-												AND Erased = 1)
+												AND Erased = 0)
 								BEGIN
 									INSERT INTO [People].[TB_StudentRecord]
 											([Student_ID]
@@ -119,8 +119,8 @@ BEGIN
 												FROM [People].[TB_StudentRecord] 
 												WHERE Student_ID = @Student_ID 
 												AND Group_ID = @Group_ID 
-												AND Record_Status LIKE 'reprobate'
-												AND Erased = 1)
+												AND LOWER(Record_Status) LIKE 'reprobate'
+												AND Erased = 0)
 								BEGIN
 									INSERT INTO [People].[TB_StudentRecord]
 											([Student_ID]
@@ -141,7 +141,7 @@ BEGIN
 												FROM [People].[TB_StudentRecord] 
 												WHERE Student_ID = @Student_ID 
 												AND Group_ID = @Group_ID
-												AND Erased = 1)
+												AND Erased = 0)
 								BEGIN
 									INSERT INTO [People].[TB_StudentRecord]
 											([Student_ID]

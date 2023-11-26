@@ -6,14 +6,14 @@
 --to the person schema.>
 -- =============================================
 
-CREATE PROCEDURE People.SP_Student_Select
+CREATE OR ALTER PROCEDURE People.SP_Student_Select
 AS
 BEGIN
 	BEGIN TRY
 
 		SELECT Student_ID, Date_Admission, People_ID
 		FROM People.TB_Student
-		WHERE Erased = 1
+		WHERE Erased = 0
 
 	END TRY
 	BEGIN CATCH

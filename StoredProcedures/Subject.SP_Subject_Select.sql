@@ -18,7 +18,7 @@ BEGIN
 		  ,[Subject_Description]
 		  ,[School_ID]
 		FROM [Subject].[TB_Subject]
-		WHERE Erased = 1
+		WHERE Erased = 0
 
 	END TRY
 	BEGIN CATCH

@@ -5,7 +5,7 @@
 --student into the TB_Student table, belonging 
 --to the person schema.>
 -- =============================================
-CREATE PROCEDURE People.SP_Delete_Student 
+CREATE OR ALTER PROCEDURE People.SP_Delete_Student 
 	-- Add the parameters for the stored procedure here
 	@Param_Student_ID VARCHAR(10)--Unique numeric identifier that identifies each person
 AS
@@ -13,7 +13,8 @@ BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 			FROM People.TB_Student 
-			WHERE Student_ID=@Param_Student_ID)
+			WHERE Student_ID=@Param_Student_ID
+			AND Erased = 0)
 		--Validation to know if the Student you want to delete exists.
 		BEGIN
 			DECLARE @People_ID INT
@@ -25,7 +26,7 @@ BEGIN
 			UPDATE 
 				People.TB_Student
 			SET
-				Erased=0
+				Erased = 1
 			WHERE Student_ID=@Param_Student_ID;
 			--The deletion is done by logical deletion by changing the state of the deletion column from 1 to 0.
 			EXEC People.SP_Delete_Person @People_ID
