@@ -24,7 +24,7 @@ BEGIN
             LEN(ISNULL(@param_Teacher_ID, '')) > 0
         )
         BEGIN
-            IF EXISTS (SELECT 1 FROM People.TB_Group_Teacher WHERE Group_ID = @param_Group_ID AND Teacher_ID = @param_Teacher_ID AND Erased = 1)
+            IF EXISTS (SELECT 1 FROM People.TB_Group_Teacher WHERE Group_ID = @param_Group_ID AND Teacher_ID = @param_Teacher_ID AND Erased = 0)
             BEGIN
                 UPDATE People.TB_Group_Teacher
                 SET Group_ID = ISNULL(@param_Group_ID, Group_ID),
