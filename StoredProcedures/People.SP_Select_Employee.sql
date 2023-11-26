@@ -2,6 +2,9 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+USE
+IF4100_C10767
+GO
 -- =============================================
 -- Author:		<Jesner Melgara>
 -- Create date: <05-11-2023>
@@ -17,7 +20,8 @@ BEGIN
         Administrative_Salary,
         Date_Admission
     FROM
-        People.TB_Employee;
+        People.TB_Employee
+	
     END TRY
     BEGIN CATCH
         SELECT ERROR_PROCEDURE() AS [PROCEDURE],

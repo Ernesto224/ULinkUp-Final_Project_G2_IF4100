@@ -15,7 +15,7 @@ BEGIN
     BEGIN TRY
         SELECT Teacher_ID, Group_ID
         FROM People.TB_Group_Teacher
-		WHERE Erased = 1;
+		WHERE Erased = 0;
     END TRY
     BEGIN CATCH
         SELECT ERROR_PROCEDURE() AS [PROCEDURE],

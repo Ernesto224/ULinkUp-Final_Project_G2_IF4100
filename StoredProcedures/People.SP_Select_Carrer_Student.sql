@@ -17,7 +17,7 @@ BEGIN
     BEGIN TRY
         SELECT Career_ID, Student_ID
         FROM People.TB_Career_Student
-		WHERE Erased = 1;
+		WHERE Erased = 0;
     END TRY
     BEGIN CATCH
         SELECT ERROR_PROCEDURE() AS [PROCEDURE],

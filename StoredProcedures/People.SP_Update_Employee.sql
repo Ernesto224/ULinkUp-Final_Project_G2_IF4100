@@ -23,7 +23,7 @@ BEGIN
             @param_Administrative_Salary IS NOT NULL
         )
         BEGIN
-            IF EXISTS (SELECT 1 FROM People.TB_Employee WHERE Employee_ID = @param_Employee_ID AND Erased = 1)
+            IF EXISTS (SELECT 1 FROM People.TB_Employee WHERE Employee_ID = @param_Employee_ID AND Erased = 0)
             BEGIN
                 UPDATE People.TB_Employee
                 SET

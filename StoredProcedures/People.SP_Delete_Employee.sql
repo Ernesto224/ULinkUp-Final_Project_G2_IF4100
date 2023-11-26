@@ -19,7 +19,7 @@ BEGIN
             IF EXISTS (SELECT 1 FROM People.TB_Employee WHERE Employee_ID = @param_Teacher_ID)
             BEGIN
                 UPDATE People.TB_Employee
-                SET Erased = 0
+                SET Erased = 1
                 WHERE Employee_ID = @param_Teacher_ID;
             END
             ELSE
