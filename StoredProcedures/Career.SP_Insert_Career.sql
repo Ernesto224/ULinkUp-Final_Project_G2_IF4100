@@ -1,11 +1,13 @@
--- Author: Nubia Brenes Valer�n
+-- Author: Nubia Brenes Valerín
+-- Create date: 10/24/2023
+-- Description: SP to Insert data about Career into the TB_Career table, belonging to the Career schema.
+
+-- Author: Nubia Brenes Valerín
 CREATE PROCEDURE Career.SP_Insert_Career 
 	-- Add the parameters for the stored procedure here
-	@Param_Career_ID           INT NOT NULL,
-	--@Param_Career_acronym    VARCHAR(10) NOT NULL,
-	@Param_Career_Abbrev       VARCHAR(10) NOT NULL,
-	@Param_Career_Name         VARCHAR(50) NOT NULL,
-	@Param_Career_Description  VARCHAR(500) NOT NULL,
+	@Param_Career_Acronym    VARCHAR(10),
+	@Param_Career_Name         VARCHAR(50),
+	@Param_Career_Description  VARCHAR(500),
 	@Param_Faculty_ID          INT
 
 AS
@@ -13,17 +15,13 @@ BEGIN
 	BEGIN TRY
 		INSERT INTO Career.TB_Career
 		(		
-			Career_ID,
-			--Career_acronym,
-			Career_Abbrev,
+			Career_Acronym,
 			Career_Name,
 			Career_Description,
 			Faculty_ID 
 		)VALUES
 		(      
-			@Param_Career_ID,
-			--@Param_Career_acronym,
-			@Param_Career_Abbrev,
+			@Param_Career_Acronym,
 			@Param_Career_Name,
 			@Param_Career_Description,
 			@Param_Faculty_ID 

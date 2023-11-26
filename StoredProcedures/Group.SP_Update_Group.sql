@@ -1,21 +1,24 @@
--- Author: Nubia Brenes Valerín
-CREATE PROCEDURE Group.SP_Update_Group
+-- Author: Nubia Brenes ValerÃ­n
+-- Create date: 10/24/2023
+-- Description: SP to Update data about Group into the TB_Group table, belonging to the Group schema.
+
+CREATE PROCEDURE [Group].SP_Update_Group
 	-- Add the parameters for the stored procedure here
-	@Param_Group_ID INT NOT NULL,
-	@Param_Group_Number INT NOT NULL,
-	@Param_Students_Enrolled INT NOT NULL,
-	@Param_Subject_ID INT NOT NULL,
-	@Param_Modality_ID INT NOT NULL 
+	@Param_Group_ID INT,
+	@Param_Group_Number INT,
+	@Param_Students_Enrolled INT,
+	@Param_Subject_ID INT,
+	@Param_Modality_ID INT  
 AS
 BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
-			FROM Group.TB_Group 
+			FROM [Group].TB_Group 
 			WHERE Group_ID=@Param_Group_ID)
-		--Validation to know if the faculty you want to update exists.
+		--Validation to know if the Group you want to update exists.
 		BEGIN
 			UPDATE 
-				Group.TB_Group
+				[Group].TB_Group
 			SET
 				Group_Number=@Param_Group_Number,
 				Students_Enrolled=@Param_Students_Enrolled,

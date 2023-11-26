@@ -1,5 +1,8 @@
--- Author: Nubia Brenes Valerín
-CREATE PROCEDURE Career_Subject.SP_Update_Career_Subject
+-- Author: Nubia Brenes ValerÃ­n
+-- Create date: 10/24/2023
+-- Description: SP to Update data about Career into the TB_Career_Subject table, belonging to the Career schema.
+
+CREATE PROCEDURE Career.SP_Update_Career_Subject
 	-- Add the parameters for the stored procedure here
 	@Param_Career_ID   INT,
 	@Param_Subject_ID  INT,
@@ -9,12 +12,12 @@ AS
 BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
-			FROM Career_Subject.TB_Career_Subject
+			FROM Career.TB_Career_Subject
 			WHERE Career_ID=@Param_Career_ID AND Subject_ID=@Param_Subject_ID)
 		--Validation to know if the Career you want to update exists.
 		BEGIN
 			UPDATE 
-				Career_Subject.TB_Career_Subject
+				Career.TB_Career_Subject
 			SET
 				Semester=@Param_Semester 
 

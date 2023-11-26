@@ -1,16 +1,19 @@
--- Author: Nubia Brenes Valerín
-CREATE PROCEDURE Group.SP_Insert_Group 
+-- Author: Nubia Brenes ValerÃ­n
+-- Create date: 10/24/2023
+-- Description: SP to Insert data about Group into the TB_Group table, belonging to the Group schema.
+
+CREATE PROCEDURE [Group].SP_Insert_Group 
 	-- Add the parameters for the stored procedure here
-	@Param_Group_ID               INT NOT NULL,
-	@Param_Group_Number           INT NOT NULL,
-	@Param_Students_Enrolled      INT NOT NULL,
-	@Param_Subject_ID             INT NOT NULL,
-	@Param_Modality_ID            INT NOT NULL
+	@Param_Group_ID               INT,
+	@Param_Group_Number           INT,
+	@Param_Students_Enrolled      INT,
+	@Param_Subject_ID             INT,
+	@Param_Modality_ID            INT
 
 AS
 BEGIN
 	BEGIN TRY
-		INSERT INTO Group.TB_Group
+		INSERT INTO [Group].TB_Group
 		(		
 			Group_ID,
 			Group_Number,
