@@ -263,12 +263,12 @@ VALUES (1, 1, 2),
        (1, 3, 2);
 
 -----------Group_Class_Schedule
-INSERT INTO Class_Schedule.Group_Class_Schedule (Group_ID, Schedule_ID)
+INSERT INTO Class_Schedule.TB_Group_Class_Schedule (Group_ID, Schedule_ID)
 VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (1, 2), (2, 2), (3, 2), (4, 2), (5, 2);
 
 -----------Group_Teacher
 INSERT INTO People.TB_Group_Teacher (Group_ID, Teacher_ID)
-VALUES (1, 9), (2, 10), (3, 11), (4, 12), (5, 13), (6, 14);
+VALUES (1, 1), (2, 2), (3, 3), (4, 4), (5, 5);
 
 ------------TB_Classroom_Group
 INSERT INTO [Classroom].[TB_Classroom_Group]
@@ -281,7 +281,7 @@ INSERT INTO [Classroom].[TB_Classroom_Group]
 		   (3, 3, 2023, 2),
 		   (4, 4, 2023, 2),
 		   (5, 5, 2024, 1),
-		   (6, 6, 2024, 1)
+		   (1, 1, 2024, 1)
 
 ------------People.TB_StudentRecord
 INSERT INTO People.TB_StudentRecord
@@ -296,13 +296,13 @@ INSERT INTO People.TB_StudentRecord
     )
     VALUES
     (
-        'A00001',
+        'A00005',
         2023,
         1,
         80,
         'Registered',
-        6,
-        1
+        5,
+        0
     );
 
 	INSERT INTO People.TB_StudentRecord
@@ -317,13 +317,13 @@ INSERT INTO People.TB_StudentRecord
     )
     VALUES
     (
-        'A00001',
+        'A00006',
         2023,
         1,
         80,
         'Registered',
         2,
-        1
+        0
     );
 
 

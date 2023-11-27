@@ -1,4 +1,4 @@
-CREATE TABLE Class_Schedule.Group_Class_Schedule --TABLE WITH ITS ATTRIBUTES
+CREATE TABLE Class_Schedule.TB_Group_Class_Schedule --TABLE WITH ITS ATTRIBUTES
 (
 	Group_ID INT NOT NULL
 	,FOREIGN KEY(Group_ID) REFERENCES [Group].TB_Group(Group_ID)
