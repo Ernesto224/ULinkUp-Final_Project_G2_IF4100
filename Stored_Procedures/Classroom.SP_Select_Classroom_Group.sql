@@ -8,7 +8,7 @@ BEGIN
             CG_Year,
             CG_Semester
         FROM Classroom.TB_Classroom_Group
-        WHERE Erased = 1; -- Only select active records (Erased = 1)
+        WHERE Erased = 0; -- Only select active records (Erased = 0)
     END TRY
     BEGIN CATCH
         SELECT ERROR_PROCEDURE() AS [PROCEDURE];

@@ -14,7 +14,7 @@ BEGIN
 			Classroom_Number,
 			Building_ID
 		FROM Classroom.TB_Classroom
-		WHERE Erased = 1
+		WHERE Erased = 0
 
 	END TRY
 	BEGIN CATCH

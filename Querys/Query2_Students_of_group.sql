@@ -8,7 +8,7 @@ SELECT Student.Student_ID,
 		People.People_Email,
 		People.People_Address,
 		CASE
-			WHEN  THEN 'Yes'
+			WHEN 1 > 0 THEN 'Yes'
 			ELSE 'Not'
 		END AS Repeated_Course
 FROM People.TB_People AS People 
@@ -17,3 +17,7 @@ FROM People.TB_People AS People
 		INNER JOIN People.TB_StudentRecord AS Student_Rec
 			ON Student.Student_ID = Student_Rec.Student_ID
 				WHERE Student_Rec.Group_ID = @Group_ID
+
+
+				SELECT 
+				FROM 
