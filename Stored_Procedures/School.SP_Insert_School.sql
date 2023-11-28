@@ -1,5 +1,6 @@
 -- Insert a new school
-CREATE PROCEDURE School.SP_Insert_School
+--REVISADO
+CREATE OR ALTER PROCEDURE School.SP_Insert_School
     @Param_Name_School VARCHAR(50),
 	@Param_School_abbrev VARCHAR(10) NULL,
     @Param_Description_School VARCHAR(100)

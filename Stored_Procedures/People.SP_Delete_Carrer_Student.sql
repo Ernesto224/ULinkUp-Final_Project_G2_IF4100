@@ -5,7 +5,7 @@ GO
 
 USE IF4100_C10767
 GO
-
+---REVISADO
 CREATE OR ALTER PROCEDURE People.SP_Delete_Career_Student
     @param_Career_ID INT,
     @param_Student_ID VARCHAR(10)
@@ -14,18 +14,21 @@ BEGIN
 	BEGIN TRY
 		IF (
             @param_Career_ID IS NOT NULL AND
-            @param_Student_ID IS NOT NULL AND
-            LEN(ISNULL(@param_Student_ID, '')) > 0
+            @param_Student_ID IS NOT NULL
         )
 		BEGIN
 			IF EXISTS(SELECT TOP 1 1 
 					FROM People.TB_Career_Student
-					WHERE Career_ID = @param_Career_ID AND Student_ID = @param_Student_ID)
+					WHERE Career_ID = @param_Career_ID 
+					AND Student_ID = @param_Student_ID
+					AND Erased = 0)
 			BEGIN
 				UPDATE People.TB_Career_Student
 				SET
 					Erased = 1
-				WHERE Career_ID = @param_Career_ID AND Student_ID = @param_Student_ID;
+				WHERE Career_ID = @param_Career_ID 
+				AND Student_ID = @param_Student_ID
+				AND Erased = 0;
 			END
 			ELSE
 			BEGIN

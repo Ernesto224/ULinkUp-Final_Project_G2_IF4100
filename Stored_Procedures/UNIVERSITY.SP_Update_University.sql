@@ -3,22 +3,24 @@
 -- Create date: 06/11/2023
 -- Description:	UNIVERSITY.SP_Update_University
 -- =============================================
-CREATE PROCEDURE UNIVERSITY.SP_Update_University 
-	@Param_University_ID INT --IDENTIFIER FOR UNIVERSITY
-	@Param_Universty_Name VARCHAR(50) NULL
+--REVISADO
+CREATE OR ALTER PROCEDURE University.SP_Update_University
+	@Param_University_ID INT,
+	@Param_Universty_Name VARCHAR(100)
 AS
 BEGIN
 	BEGIN TRY
 		IF EXISTS(
 					SELECT 
 						TOP 1 1
-					FROM UNIVERSITY.University_TB
-					WHERE UNIVERSITY_ID = @Param_University_ID)
+					FROM University.TB_University
+					WHERE University_ID = @Param_University_ID
+					AND Erased = 0)
 						BEGIN 
-							UPDATE UNIVERSITY.TB_University
+							UPDATE University.TB_University
 							SET
-								University_ID = ISNULL(@Param_Universty_Name)
-							WHERE UNIVERSITY_ID = @Param_University_ID
+								University_Name = @Param_Universty_Name
+							WHERE University_ID = @Param_University_ID
 						END
 		ELSE
 			BEGIN

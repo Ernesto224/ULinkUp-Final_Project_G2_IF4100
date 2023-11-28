@@ -5,7 +5,8 @@
 --student, into the TB_Student table, belonging 
 --to the person schema.>
 -- =============================================
-CREATE PROCEDURE People.SP_Update_Student 
+--REVISADO
+CREATE OR ALTER PROCEDURE People.SP_Update_Student 
 	-- Add the parameters for the stored procedure here
 	@Param_Student_ID VARCHAR(10),--Unique numeric identifier that identifies each person
 	@Param_People_Name VARCHAR(50) NULL,--Name of individual
@@ -18,14 +19,14 @@ BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 			FROM People.TB_Student 
-			WHERE Student_ID = @Param_Student_ID)
+			WHERE Student_ID = @Param_Student_ID AND Erased =0)
 		--Validation to know if the person you want to update exists.
 		BEGIN
 			DECLARE @People_ID INT
 			SET @People_ID = (SELECT
 							People_ID
 							FROM People.TB_Student 
-							WHERE Student_ID = @Param_Student_ID)
+							WHERE Student_ID = @Param_Student_ID AND Erased =0)
 			EXEC People.SP_Update_Person
 				@People_ID,
 				@Param_People_Name,

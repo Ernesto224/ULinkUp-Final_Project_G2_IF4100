@@ -12,16 +12,15 @@ GO
 -- Description:	<inserting data into the table named People.TB_Group_Teacher>
 -- =============================================
 -- Create procedure for inserting data into the table named People.TB_Group_Teacher
-CREATE PROCEDURE People.SP_Insert_Group_Teacher
-    @param_Teacher_ID VARCHAR(20),
+---REVISADO
+CREATE OR ALTER PROCEDURE People.SP_Insert_Group_Teacher
+    @param_Teacher_ID INT,
     @param_Group_ID INT
 AS
 BEGIN
     BEGIN TRY
-        IF (
-            LEN(ISNULL(@param_Teacher_ID, '')) > 0 AND
-            @param_Group_ID IS NOT NULL
-        )
+        IF EXISTS(SELECT TOP 1 1 FROM People.TB_Employee WHERE Employee_ID = @param_Teacher_ID AND Job LIKE '[tp]%' AND Erased = 0)
+		AND EXISTS(SELECT TOP 1 1 FROM [Group].TB_Group WHERE Group_ID = @param_Group_ID AND Erased = 0)
         BEGIN
             INSERT INTO People.TB_Group_Teacher (Teacher_ID, Group_ID)
             VALUES (@param_Teacher_ID, @param_Group_ID);

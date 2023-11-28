@@ -5,8 +5,8 @@
 --people into the TB_People table, belonging 
 --to the person schema.>
 -- =============================================
-
-CREATE PROCEDURE People.SP_People_Select
+--REVISADO
+CREATE OR ALTER PROCEDURE People.SP_People_Select
 AS
 BEGIN
 	BEGIN TRY
@@ -18,7 +18,7 @@ BEGIN
 			People_Phone, 
 			People_Email
 		FROM People.TB_People
-		WHERE Erased = 1
+		WHERE Erased = 0
 
 	END TRY
 	BEGIN CATCH

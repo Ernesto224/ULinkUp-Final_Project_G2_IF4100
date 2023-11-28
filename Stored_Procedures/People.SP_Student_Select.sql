@@ -5,7 +5,7 @@
 --student, into the TB_Student table, belonging 
 --to the person schema.>
 -- =============================================
-
+--REVISADO
 CREATE OR ALTER PROCEDURE People.SP_Student_Select
 AS
 BEGIN

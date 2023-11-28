@@ -12,37 +12,36 @@ GO
 -- Description:	<Store procedure for insert datas>
 -- =============================================
 -- Store procedure for insert data into the table named People.TB_Employee
-CREATE PROCEDURE People.SP_Insert_Employee
+---REVISADO
+CREATE OR ALTER PROCEDURE People.SP_Insert_Employee
     @param_Job VARCHAR(100),
-    @param_Job_Description VARCHAR(500),
+    @param_Job_Description VARCHAR(500) NULL,
+	@param_Administrative_Salary NUMERIC(16, 3),
     @param_Date_Admission DATE,
-    @param_Administrative_Salary NUMERIC(16, 6)
+    @param_People_ID INT
 AS
 BEGIN
     BEGIN TRY
-        IF (
-            LEN(ISNULL(@param_Job, '')) > 0 AND
-            LEN(ISNULL(@param_Job_Description, '')) > 0 AND
-            @param_Date_Admission IS NOT NULL AND
-            @param_Administrative_Salary IS NOT NULL
-        )
+        IF EXISTS(SELECT TOP 1 1 FROM People.TB_People WHERE People_ID = @param_People_ID AND Erased = 0)
         BEGIN
             INSERT INTO People.TB_Employee (
                 Job,
                 Job_Description,
-                Date_Admission,
-                Administrative_Salary
+                Administrative_Salary,
+				Date_Admission,
+                People_ID
             )
             VALUES (
                 @param_Job,
                 @param_Job_Description,
-                @param_Date_Admission,
-                @param_Administrative_Salary
+                @param_Administrative_Salary,
+				@param_Date_Admission,
+                @param_People_ID
             );
         END
         ELSE
         BEGIN
-            SELECT 'Invalid input parameters. Please provide valid values for Job, Job_Description, Date_Admission, and Administrative_Salary.'
+            SELECT 'Invalid input parameters. Please provide valid values for People_ID.'
         END
     END TRY
     BEGIN CATCH

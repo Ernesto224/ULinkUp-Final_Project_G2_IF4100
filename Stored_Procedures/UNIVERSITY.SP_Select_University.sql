@@ -3,15 +3,15 @@
 -- Create date: 12/11/2023
 -- Description:	Query for University table 
 -- =============================================
-CREATE PROCEDURE UNIVERSITY.SP_Select_University 
+CREATE OR ALTER PROCEDURE University.SP_Select_University 
 AS
 BEGIN
 	BEGIN  TRY
 		SELECT 
 			University_ID
 			,University_Name
-			,Erased
-		FROM UNIVERSITY.TB_University
+		FROM University.TB_University
+		WHERE Erased = 0
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_PROCEDURE() AS [PROCEDURE]

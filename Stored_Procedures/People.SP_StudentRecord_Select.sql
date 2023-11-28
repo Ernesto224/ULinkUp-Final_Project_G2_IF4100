@@ -5,21 +5,21 @@
 --people into the TB_StudentRecord, belonging 
 --to the person schema.>
 -- =============================================
-
-CREATE PROCEDURE People.SP_StudentRecord_Select
+--REVISADO
+CREATE OR ALTER PROCEDURE People.SP_StudentRecord_Select
 AS
 BEGIN
 BEGIN TRY
 
 	SELECT
-		sr.Student_ID,
-		sr.Record_Year,
-		sr.Record_Semester,
-		sr.Record_Average,
-		sr.Record_Status,
-		sr.Group_ID
-	FROM People.TB_StudentRecord AS sr
-	WHERE Erased = 1
+		Studen_Record.Student_ID,
+		Studen_Record.Record_Year,
+		Studen_Record.Record_Semester,
+		Studen_Record.Record_Average,
+		Studen_Record.Record_Status,
+		Studen_Record.Group_ID
+	FROM People.TB_StudentRecord AS Studen_Record
+	WHERE Erased = 0
 
 END TRY
 BEGIN CATCH

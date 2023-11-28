@@ -5,8 +5,8 @@
 --data from the TB_School, belonging 
 --to the Subject schema.>
 -- =============================================
-
-CREATE PROCEDURE School.SP_Select_School
+--REVISADO
+CREATE OR ALTER PROCEDURE School.SP_Select_School
 AS
 BEGIN
 	BEGIN TRY
@@ -17,7 +17,7 @@ BEGIN
             School_Description,
             Faculty_ID
 		FROM School.TB_School
-		WHERE Erased = 1
+		WHERE Erased = 0
 
 	END TRY
 	BEGIN CATCH

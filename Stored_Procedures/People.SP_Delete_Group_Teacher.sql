@@ -1,4 +1,3 @@
-
 -- =============================================
 -- Author:		<Jesner Melgara>
 -- Create date: <20-10-2023>
@@ -12,43 +11,32 @@ GO
 
 USE IF4100_C10767
 GO
-
-CREATE PROCEDURE People.SP_Delete_Group_Teacher
-    @param_Teacher_ID VARCHAR(10)
+---REVISADO
+CREATE OR ALTER PROCEDURE People.SP_Delete_Group_Teacher
+    @param_Group_ID INT,
+	@param_Teacher_ID INT
 AS
 BEGIN
     BEGIN TRY
-        IF @param_Teacher_ID IS NOT NULL AND LEN(@param_Teacher_ID) > 0
+        IF EXISTS (SELECT TOP 1 1
+				FROM People.TB_Group_Teacher
+				WHERE Group_ID = @param_Group_ID AND  Teacher_ID = @param_Teacher_ID AND Erased = 0)
         BEGIN
-            DECLARE @EmployeeExists BIT = 0;
+            UPDATE People.TB_Group_Teacher
+            SET Erased = 1
+            WHERE Group_ID = @param_Group_ID AND  Teacher_ID = @param_Teacher_ID AND Erased = 0;
 
-            SELECT @EmployeeExists = 1
-            FROM People.TB_Employee
-            WHERE Employee_ID = @param_Teacher_ID;
-
-            IF @EmployeeExists = 1
-            BEGIN
-                UPDATE People.TB_Employee
-                SET Erased = 1
-                WHERE Employee_ID = @param_Teacher_ID;
-
-                SELECT 'Teacher deleted successfully' AS [Message];
-            END
-            ELSE
-            BEGIN
-                SELECT 'The employee does not exist in the DB';
-            END
+            SELECT 'Teacher deleted successfully' AS [Message];
         END
         ELSE
         BEGIN
-            SELECT 'Invalid input parameter. Please provide a valid value for Teacher_ID.';
+            SELECT 'Invalid input parameter. Please provide a valid value for Teacher_ID.' AS [NOTIFICATION];
         END
     END TRY
     BEGIN CATCH
         SELECT 
             ERROR_PROCEDURE() AS [PROCEDURE],
-            ERROR_MESSAGE() AS [ERROR_MESSAGE],
-            ERROR_NUMBER() AS [ERROR_NUMBER];
+            ERROR_MESSAGE() AS [ERROR_MESSAGE];
     END CATCH
 END;
 GO

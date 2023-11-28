@@ -1,7 +1,7 @@
 -- Author: Nubia Brenes Valerín
 -- Create date: 10/24/2023
 -- Description: SP to Delete data about Group into the TB_Group table, belonging to the Group schema.
-
+--REVISADO
 CREATE OR ALTER PROCEDURE [Group].SP_Delete_Group
 	-- Add the parameters for the stored procedure here
 	@Param_Group_ID INT
@@ -10,7 +10,7 @@ BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 			FROM [Group].TB_Group
-			WHERE Group_ID=@Param_Group_ID)
+			WHERE Group_ID=@Param_Group_ID AND Erased = 0)
 		--Validation to know if the faculty you want to delete exists.
 		BEGIN
 			UPDATE 

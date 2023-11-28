@@ -5,13 +5,14 @@
 --people into the TB_People table, belonging 
 --to the person schema.>
 -- =============================================
-CREATE PROCEDURE People.SP_Insert_Person 
+---REVISADO
+CREATE OR ALTER PROCEDURE People.SP_Insert_Person 
 	-- Add the parameters for the stored procedure here
 	@Param_People_Name VARCHAR(50),--Name of individual
 	@Param_People_Last_Name VARCHAR(50),--First and second surname of the person
-	@Param_People_Address VARCHAR(500),--Exact address of residence
-	@Param_People_Phone VARCHAR(15) NULL, --The person's phone number can be null
-	@Param_People_Email VARCHAR(320)--Person's email address
+	@Param_People_Address VARCHAR(100),--Exact address of residence
+	@Param_People_Phone VARCHAR(20) NULL, --The person's phone number can be null
+	@Param_People_Email VARCHAR(125)--Person's email address
 AS
 BEGIN
 	BEGIN TRY

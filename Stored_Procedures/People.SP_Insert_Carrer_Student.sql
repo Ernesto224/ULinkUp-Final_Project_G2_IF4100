@@ -13,13 +13,15 @@ GO
 -- Description:	<Inserting data into the table named People.TB_Career_Student>
 -- =============================================
 -- Create procedure for inserting data into the table named People.TB_Career_Student
-CREATE PROCEDURE People.SP_Insert_Career_Student
+---REVISADO
+CREATE OR ALTER PROCEDURE People.SP_Insert_Career_Student
     @param_Career_ID INT,
     @param_Student_ID VARCHAR(10)
 AS
 BEGIN
     BEGIN TRY
-        IF (ISNULL(@param_Career_ID, 0) <> 0) AND (ISNULL(@param_Student_ID, '') <> '')
+        IF EXISTS(SELECT TOP 1 1 FROM Career.TB_Career WHERE Career_ID = @param_Career_ID AND Erased = 0) AND
+		EXISTS(SELECT TOP 1 1 FROM People.TB_Student WHERE Student_ID LIKE @param_Student_ID AND Erased = 0)
         BEGIN
             INSERT INTO People.TB_Career_Student (Career_ID, Student_ID)
             VALUES (@param_Career_ID, @param_Student_ID);

@@ -5,7 +5,7 @@
 --people into the TB_StudentRecord, belonging 
 --to the person schema.>
 -- =============================================
-
+--REVISADO
 CREATE OR ALTER PROCEDURE People.SP_StudentRecord_Update
 (
 	@Student_ID varchar(10),

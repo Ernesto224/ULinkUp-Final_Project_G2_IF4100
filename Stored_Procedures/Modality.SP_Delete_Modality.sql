@@ -1,10 +1,11 @@
 -- Delete a modality (logical deletion)
+--REVISADO
 CREATE OR ALTER PROCEDURE Modality.SP_Delete_Modality
     @Param_ID_Modality INT
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM Modality.TB_Modality WHERE Modality_ID = @Param_ID_Modality)
+        IF EXISTS (SELECT TOP 1 1 FROM Modality.TB_Modality WHERE Modality_ID = @Param_ID_Modality AND Erased = 0)
         BEGIN
             UPDATE Modality.TB_Modality
             SET Erased = 1

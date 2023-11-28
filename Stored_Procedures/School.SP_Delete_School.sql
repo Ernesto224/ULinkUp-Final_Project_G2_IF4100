@@ -1,4 +1,5 @@
 -- Delete a school (logical deletion)
+--REVISADO
 CREATE OR ALTER PROCEDURE School.SP_Delete_School
     @Param_ID_School INT
 AS

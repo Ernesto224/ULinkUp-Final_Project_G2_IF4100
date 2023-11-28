@@ -9,6 +9,7 @@ GO
 -- Create date: <10-11-2023>
 -- Description:	<Selecting data into the table named People.TB_Career_Student>
 -- Create procedure for selecting data from the table named People.TB_Group_Teacher
+--REVISADO
 CREATE OR ALTER PROCEDURE People.SP_Select_Group_Teacher
 AS
 BEGIN

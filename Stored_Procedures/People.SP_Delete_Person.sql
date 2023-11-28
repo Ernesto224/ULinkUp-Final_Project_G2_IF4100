@@ -5,6 +5,7 @@
 --people into the TB_People table, belonging 
 --to the person schema.>
 -- =============================================
+--REVISADO
 CREATE OR ALTER PROCEDURE People.SP_Delete_Person 
 	-- Add the parameters for the stored procedure here
 	@Param_People_ID INT--Unique numeric identifier that identifies each person

@@ -1,30 +1,42 @@
 -- Author: Nubia Brenes Valerín
 -- Create date: 10/24/2023
 -- Description: SP to Update data about Group into the TB_Group table, belonging to the Group schema.
-
-CREATE PROCEDURE [Group].SP_Update_Group
+--REVISADO
+CREATE OR ALTER PROCEDURE [Group].SP_Update_Group
 	-- Add the parameters for the stored procedure here
 	@Param_Group_ID INT,
-	@Param_Group_Number INT,
-	@Param_Students_Enrolled INT,
-	@Param_Subject_ID INT,
-	@Param_Modality_ID INT  
+	@Param_Group_Number INT NULL,
+	@Param_Students_Enrolled INT NULL,
+	@Param_Modality_ID INT NULL 
 AS
 BEGIN
 	BEGIN TRY
 		IF EXISTS(SELECT TOP 1 1 
 			FROM [Group].TB_Group 
-			WHERE Group_ID=@Param_Group_ID)
+			WHERE Group_ID=@Param_Group_ID AND Erased = 0)
 		--Validation to know if the Group you want to update exists.
 		BEGIN
-			UPDATE 
-				[Group].TB_Group
-			SET
-				Group_Number=@Param_Group_Number,
-				Students_Enrolled=@Param_Students_Enrolled,
-				Subject_ID=@Param_Subject_ID,
-				Modality_ID=@Param_Modality_ID
-			WHERE Group_ID=@Param_Group_ID;
+
+			IF @Param_Modality_ID IS NULL
+			BEGIN
+				UPDATE 
+					[Group].TB_Group
+				SET
+					Group_Number=ISNULL(@Param_Group_Number,Group_Number),
+					Students_Enrolled=ISNULL(@Param_Students_Enrolled, Students_Enrolled)
+				WHERE Group_ID=@Param_Group_ID
+			END
+			ELSE IF EXISTS(SELECT TOP 1 1 FROM Modality.TB_Modality WHERE Modality_ID = @Param_Modality_ID AND Erased = 0)
+			BEGIN
+				UPDATE 
+					[Group].TB_Group
+				SET
+					Group_Number=ISNULL(@Param_Group_Number,Group_Number),
+					Students_Enrolled=ISNULL(@Param_Students_Enrolled, Students_Enrolled),
+					Modality_ID=ISNULL(@Param_Modality_ID,Modality_ID)
+				WHERE Group_ID=@Param_Group_ID
+			END
+	
 		END
 		ELSE
 		BEGIN
