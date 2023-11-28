@@ -1,5 +1,9 @@
 -- Update the relationship between a classroom and a group
-CREATE PROCEDURE Classroom.SP_Update_Classroom_Group
+
+USE IF4100_C10767;
+GO
+--REVISADO
+CREATE OR ALTER PROCEDURE Classroom.SP_Update_Classroom_Group
     @Param_Classroom_ID INT,
     @Param_Group_ID INT,
     @Param_CG_Year INT,
@@ -7,13 +11,13 @@ CREATE PROCEDURE Classroom.SP_Update_Classroom_Group
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM CLASSROOM.TB_CLASSROOM_GROUP WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID)
+        IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom_Group WHERE Classroom_ID = @Param_Classroom_ID AND Group_ID = @Param_Group_ID AND Erased = 0)
         BEGIN
             UPDATE Classroom.TB_Classroom_Group
             SET 
-                CG_YEAR = ISNULL(@Param_CG_Year, CG_YEAR),
-                CG_SEMESTER = @Param_CG_Semester
-            WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID;
+                CG_Year = ISNULL(@Param_CG_Year, CG_Year),
+                CG_Semester = ISNULL(@Param_CG_Semester, CG_Semester)
+            WHERE Classroom_ID = @Param_Classroom_ID AND Group_ID = @Param_Group_ID AND Erased = 0;
         END
         ELSE
         BEGIN
@@ -21,7 +25,6 @@ BEGIN
         END
     END TRY
     BEGIN CATCH
-        SELECT ERROR_PROCEDURE() AS [PROCEDURE];
-        SELECT ERROR_MESSAGE() AS ERROR;
+        SELECT 'ERROR_PROCEDURE' AS [PROCEDURE], ERROR_MESSAGE() AS ERROR;
     END CATCH
 END;

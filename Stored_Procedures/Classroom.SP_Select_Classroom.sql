@@ -5,13 +5,17 @@
 --data from the TB_Classroom table, belonging 
 --to the Subject schema.>
 -- =============================================
-CREATE PROCEDURE Classroom.SP_Select_Classroom
+--REVISADO
+USE
+IF4100_C10767
+GO
+CREATE OR ALTER PROCEDURE Classroom.SP_Select_Classroom
 AS
 BEGIN
 	BEGIN TRY
 
 		SELECT Classroom_ID, 
-			Classroom_Number,
+			Classroom_Name,
 			Building_ID
 		FROM Classroom.TB_Classroom
 		WHERE Erased = 0

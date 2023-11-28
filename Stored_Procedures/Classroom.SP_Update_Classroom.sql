@@ -1,5 +1,9 @@
 -- Update Classroom data
-CREATE PROCEDURE Classroom.SP_Update_Classroom
+--REVISADO
+USE
+IF4100_C10767
+GO
+CREATE OR ALTER PROCEDURE Classroom.SP_Update_Classroom
  -- Add the parameters for the stored procedure here
     @Param_Classroom_ID INT, -- Unique numeric identifier for the Classroom
     @Param_Classroom_Name VARCHAR(50) NULL,--Name from the Classroom
@@ -7,14 +11,14 @@ CREATE PROCEDURE Classroom.SP_Update_Classroom
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom WHERE Classroom_ID = @Param_Classroom_ID)
+        IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom WHERE Classroom_ID = @Param_Classroom_ID AND Erased = 0)
         -- Validation to check if the Classroom you want to update exists.
         BEGIN
             UPDATE Classroom.TB_Classroom
             SET
                 Classroom_Name = ISNULL(@Param_Classroom_Name, Classroom_Name),
                 Building_ID = ISNULL((SELECT Building_ID FROM Building.TB_Building WHERE Building_ID = @Param_Building_ID), Building_ID)
-            WHERE Classroom_ID = @Param_Classroom_ID;
+            WHERE Classroom_ID = @Param_Classroom_ID AND Erased = 0;
         END
         ELSE
         BEGIN

@@ -5,7 +5,11 @@
 -- Create date: 12/11/2023
 -- Description:	Query for Schedule table 
 -- =============================================
-CREATE PROCEDURE CLASS_SCHEDULE.SP_Select_Class_Schedule
+--REVISADO
+USE
+IF4100_C10767
+GO
+CREATE OR ALTER PROCEDURE CLASS_SCHEDULE.SP_Select_Class_Schedule
 AS
 BEGIN
 	BEGIN  TRY
@@ -13,9 +17,10 @@ BEGIN
 			Schedule_ID
 			,Start_Time
 			,End_Time
-			,Day_Number
+			,Day
 			,Erased
 		FROM CLASS_SCHEDULE.TB_Class_Schedule
+		WHERE Erased = 0
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_PROCEDURE() AS [PROCEDURE]

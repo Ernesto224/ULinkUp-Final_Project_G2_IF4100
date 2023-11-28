@@ -1,5 +1,9 @@
 -- Insert a new relationship between a classroom and a group
-CREATE PROCEDURE CLASSROOM.SP_Insert_Classroom_Group
+--REVISADO
+USE
+IF4100_C10767
+GO
+CREATE OR ALTER PROCEDURE Classroom.SP_Insert_Classroom_Group
     @Param_Classroom_ID INT,
     @Param_Group_ID INT,
     @Param_CG_Year DATE = NULL,
@@ -7,12 +11,12 @@ CREATE PROCEDURE CLASSROOM.SP_Insert_Classroom_Group
 AS
 BEGIN
     BEGIN TRY
-        INSERT INTO CLASSROOM.TB_CLASSROOM_GROUP 
+        INSERT INTO Classroom.TB_Classroom_Group
         (
-            CLASSROOM_ID,
-            GROUP_ID,
-            CG_YEAR,
-            CG_SEMESTER
+            Classroom_ID,
+            Group_ID,
+            CG_Year,
+            CG_Semester
 
         )
         VALUES 

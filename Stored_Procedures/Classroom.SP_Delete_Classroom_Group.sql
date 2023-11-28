@@ -1,15 +1,17 @@
 -- Delete the relationship between a classroom and a group (logical deletion)
-CREATE PROCEDURE Classroom.SP_Delete_Classroom_Group
+
+--REVISADO
+CREATE OR ALTER PROCEDURE Classroom.SP_Delete_Classroom_Group
     @Param_Classroom_ID INT,
     @Param_Group_ID INT
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM CLASSROOM.TB_CLASSROOM_GROUP WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID)
+        IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom_Group WHERE Classroom_ID = @Param_Classroom_ID AND Group_ID = @Param_Group_ID AND Erased = 0)
         BEGIN
-            UPDATE CLASSROOM.TB_CLASSROOM_GROUP
-            SET Erased = 0
-            WHERE CLASSROOM_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID;
+            UPDATE Classroom.TB_Classroom_Group
+            SET Erased = 1
+            WHERE Classroom_ID = @Param_Classroom_ID AND GROUP_ID = @Param_Group_ID AND Erased = 0;
         END
         ELSE
         BEGIN

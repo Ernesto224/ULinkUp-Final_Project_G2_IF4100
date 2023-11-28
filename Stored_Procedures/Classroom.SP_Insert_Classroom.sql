@@ -1,5 +1,10 @@
 -- Insert a new Classroom
-ALTER PROCEDURE Classroom.SP_Insert_Classroom
+--REVISADO
+USE
+IF4100_C10767
+GO
+
+CREATE OR ALTER PROCEDURE Classroom.SP_Insert_Classroom
     @Param_Classroom_Name VARCHAR(50),
     @Param_Building_ID INT
 AS
@@ -7,7 +12,7 @@ BEGIN
     BEGIN TRY
         INSERT INTO Classroom.TB_Classroom (
             Classroom_Name,
-            BUILDING_ID
+            Building_ID
             )
         VALUES 
         (

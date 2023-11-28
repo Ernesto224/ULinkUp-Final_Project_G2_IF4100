@@ -1,14 +1,20 @@
 -- Perform logical deletion of a Classroom
-CREATE PROCEDURE Classroom.SP_Delete_Classroom
+
+--REVISADO
+
+USE
+IF4100_C10767
+GO
+CREATE OR ALTER PROCEDURE Classroom.SP_Delete_Classroom
     @Param_Classroom_ID VARCHAR(10)
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom WHERE Classroom_ID = @Param_Classroom_ID)
+        IF EXISTS (SELECT TOP 1 1 FROM Classroom.TB_Classroom WHERE Classroom_ID = @Param_Classroom_ID AND Erased =0)
         BEGIN
             UPDATE Classroom.TB_Classroom
             SET Erased = 1
-            WHERE Classroom_ID = @Param_Classroom_ID;
+            WHERE Classroom_ID = @Param_Classroom_ID AND Erased = 0;
         END
         ELSE
         BEGIN

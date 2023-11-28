@@ -5,8 +5,11 @@
 --data from the TB_Building table, belonging 
 --to the Subject schema.>
 -- =============================================
-
-CREATE PROCEDURE Building.SP_Select_Building
+USE
+IF4100_C10767
+GO
+--REVISADO
+CREATE OR ALTER PROCEDURE Building.SP_Select_Building
 AS
 BEGIN
 	BEGIN TRY
@@ -18,7 +21,7 @@ BEGIN
 			Enclosure_ID,
             Faculty_ID
 		FROM Building.TB_Building
-		WHERE Erased = 1
+		WHERE Erased = 0
 
 	END TRY
 	BEGIN CATCH

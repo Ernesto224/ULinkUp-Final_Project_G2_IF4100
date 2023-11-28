@@ -1,14 +1,17 @@
 -- Author: Kendall Sanchez Chinchilla
 -- Create date: 10/24/2023
 -- Description: SP to perform logical deletion of Buildings in the TB_Building table, belonging to the Building schema.
-
-CREATE PROCEDURE Building.SP_Delete_Building
+USE
+IF4100_C10767
+GO
+--REVISADO
+CREATE OR ALTER PROCEDURE Building.SP_Delete_Building
     -- Add the parameters for the stored procedure here
     @Param_Building_ID INT -- Unique numeric identifier for the Building
 AS
 BEGIN
     BEGIN TRY
-        IF EXISTS (SELECT TOP 1 1 FROM Building.TB_Building WHERE Building_ID = @Param_Building_ID)
+        IF EXISTS (SELECT TOP 1 1 FROM Building.TB_Building WHERE Building_ID = @Param_Building_ID AND Erased = 0)
         -- Validation to check if the Building you want to delete exists.
         BEGIN
             UPDATE Building.TB_Building

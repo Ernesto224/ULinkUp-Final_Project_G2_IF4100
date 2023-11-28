@@ -1,4 +1,10 @@
-CREATE PROCEDURE Classroom.SP_Select_Classroom_Group
+
+--REVISADO
+
+USE
+IF4100_C10767
+GO
+CREATE OR ALTER PROCEDURE Classroom.SP_Select_Classroom_Group
 AS
 BEGIN
     BEGIN TRY

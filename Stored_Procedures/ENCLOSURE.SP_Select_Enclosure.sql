@@ -3,7 +3,12 @@
 -- Create date: 12/11/2023
 -- Description:	Query for Enclosure table 
 -- =============================================
-CREATE PROCEDURE ENCLOSURE.SP_Select_Enclosure 
+--REVISADO
+
+USE
+IF4100_C10767
+GO
+CREATE OR ALTER PROCEDURE Enclosure.SP_Select_Enclosure 
 AS
 BEGIN
 	BEGIN  TRY
@@ -12,7 +17,8 @@ BEGIN
 			,Enclosure_Name
 			,Campus_ID
 			,Erased
-		FROM ENCLOSURE.TB_Enclosure
+		FROM Enclosure.TB_Enclosure
+		WHERE Erased = 0
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_PROCEDURE() AS [PROCEDURE]
