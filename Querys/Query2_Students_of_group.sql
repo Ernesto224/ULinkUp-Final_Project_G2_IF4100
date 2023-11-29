@@ -1,4 +1,4 @@
-DECLARE @Group_ID INT = 2;
+DECLARE @Group_ID INT = 62;
 
 SELECT Group_Data.*
 FROM (SELECT Student.Student_ID, 
@@ -28,7 +28,7 @@ FROM (SELECT Student.Student_ID,
 											INNER JOIN Subject.TB_Subject AS Subj 
 												ON Gro.Subject_ID = Subj.Subject_ID
 													WHERE Rec.Student_ID = Student_Rec.Student_ID
-													AND Rec.Record_Status LIKE '%Reprobate%' 
+													AND Rec.Record_Status LIKE '%Repro%'
 													AND Subj.Subject_ID LIKE (SELECT Sub.Subject_ID
 																				FROM [Group].TB_Group AS Grou
 																					INNER JOIN  Subject.TB_Subject AS Sub
